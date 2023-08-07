@@ -108,7 +108,7 @@ function BlogListPage(props: Props): JSX.Element {
           <h1>
             Writings
           </h1>
-          <p>A collection of articles and papers from Flashbots.</p>
+          <p>A collection of articles and papers from Fetcch.</p>
         </div>
         <TagsListInline tags={tags} />
         <Searchbar setValue={setSearchFilter}/>

@@ -7,8 +7,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (module.exports = {
-  title: "Flashbots",
-  tagline: "Research respository of Flashbots",
+  title: "Fetcch",
+  tagline: "Research respository of Fetcch",
   baseUrl: process.env.REACT_APP_BASE_URL,
   url: process.env.REACT_APP_TARGET_URL,
   onBrokenLinks: "throw",
@@ -78,21 +78,21 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       metadata: [
         {name: 'twitter:card', content: 'summary_large_image'},
         {name: 'twitter:title', content: 'Writings'},
-        {name: 'twitter:description', content: 'A collection of articles and papers from Flashbots.'},
+        {name: 'twitter:description', content: 'A collection of articles and papers from Fetcch.'},
         {name: 'twitter:image', content: 'img/tw-card.jpg'}
       ],
       navbar: {
-        title: "Flashbots",
+        // title: "Fetcch",
         logo: {
-          alt: "Flashbots",
-          src: "img/logo.png",
+          alt: "Fetcch",
+          src: "img/fetcch-logo.svg",
           target: "_self"
         },
         items: [
-          {href: "https://flashbots.net", label: 'About', position: 'left'},
-          {href: "https://boost.flashbots.net/", label: 'MEV-Boost', position: 'left'},
-          {href: "https://collective.flashbots.net/", label: 'Forum', position: 'left'},
-          {href: "https://jobs.flashbots.net/", label: 'Join us', position: 'left'},
+          {href: "https://fetcch.xyz", label: 'About', position: 'left'},
+          {href: "https://docs.fetcch.xyz/", label: 'Docs', position: 'left'},
+          {href: "https://discord.gg/qUkDjerAwq", label: 'Discord', position: 'left'},
+          {href: "https://twitter.com/FetcchX", label: 'Twitter', position: 'left'},
           // {
           //   type: 'localeDropdown',
           //   position: 'right',
@@ -112,28 +112,15 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             items: [
               {
                 label: 'Github',
-                href: 'https://github.com/flashbots',
+                href: 'https://github.com/fetcchx',
               },
               {
                 label: 'Documentation',
-                href: 'https://docs.flashbots.net/',
+                href: 'https://docs.fetcch.xyz/',
               },
               {
                 label: 'Status',
-                href: 'https://status.flashbots.net/',
-              },
-            ],
-          },
-          {
-            title: 'x',
-            items: [
-              {
-                label: 'Calendar',
-                href: 'https://calendar.flashbots.net/',
-              },
-              {
-                label: 'Transparency reports',
-                href: 'https://writings.flashbots.net/tags/transparency-report',
+                href: 'https://status.fetcch.xyz/',
               },
             ],
           },
@@ -142,16 +129,12 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             items: [
               {
                 label: 'Discord',
-                href: 'http://discord.gg/flashbots',
-              },
-              {
-                label: 'YouTube',
-                href: 'https://www.youtube.com/channel/UCclbTgsnYUy3vmrptIqCmqQ',
+                href: 'https://discord.gg/qUkDjerAwq',
               },
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} Flashbots, Ltd`,
+        copyright: `© ${new Date().getFullYear()} Fetcch, Ltd`,
       },
       // algolia: {
       //   apiKey: '',
