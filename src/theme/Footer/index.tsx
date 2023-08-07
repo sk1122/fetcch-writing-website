@@ -115,6 +115,11 @@ function Footer(): JSX.Element | null {
                 )}
               </div>
             )}
+            <div
+              className="footer__copyright"
+            >
+              <p>Inspired from <a href="https://writings.flashbot.net" target="_blank">Flashbot Writing</a></p>
+            </div>
             {copyright ? (
               <div
                 className="footer__copyright"

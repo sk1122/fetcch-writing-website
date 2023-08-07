@@ -134,7 +134,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} Fetcch, Ltd`,
+        copyright: `© ${new Date().getFullYear()} Fetcch, Ltd`
       },
       // algolia: {
       //   apiKey: '',
