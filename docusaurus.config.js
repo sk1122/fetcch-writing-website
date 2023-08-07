@@ -14,7 +14,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
-  organizationName: "flashbots", // Usually your GitHub org/user name.
+  organizationName: "fetcchx", // Usually your GitHub org/user name.
   projectName: "writings-website", // Usually your repo name.
   stylesheets: [
     {
@@ -89,7 +89,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
           target: "_self"
         },
         items: [
-          {href: "https://fetcch.xyz", label: 'About', position: 'left'},
+          {href: "/about", label: 'About', position: 'left'},
           {href: "https://docs.fetcch.xyz/", label: 'Docs', position: 'left'},
           {href: "https://discord.gg/qUkDjerAwq", label: 'Discord', position: 'left'},
           {href: "https://twitter.com/FetcchX", label: 'Twitter', position: 'left'},
