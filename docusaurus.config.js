@@ -79,7 +79,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
         {name: 'twitter:card', content: 'summary_large_image'},
         {name: 'twitter:title', content: 'Writings'},
         {name: 'twitter:description', content: 'A collection of articles and papers from Fetcch.'},
-        {name: 'twitter:image', content: 'img/tw-card.jpg'}
+        {name: 'twitter:image', content: 'img/tw-card.png'}
       ],
       navbar: {
         // title: "Fetcch",
