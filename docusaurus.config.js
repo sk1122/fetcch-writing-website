@@ -39,13 +39,13 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
           defaults: false, //  Adds support for dotenv-defaults. If set to true, uses ./.env.defaults
       }
     ],
-    [
-      '@docusaurus/plugin-google-gtag',
-      {
-        trackingID: 'G-VH1WPT8X9P',
-        anonymizeIP: true,
-      },
-    ],
+    // [
+    //   '@docusaurus/plugin-google-gtag',
+    //   {
+    //     trackingID: 'G-VH1WPT8X9P',
+    //     anonymizeIP: true,
+    //   },
+    // ],
   ],
   presets: [
     [
@@ -141,7 +141,11 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             ],
           },
         ],
-        copyright: `© ${new Date().getFullYear()} Fetcch, Ltd`
+        copyright: `© ${new Date().getFullYear()} Fetcch, Ltd`,
+      },
+      gtag: {
+        trackingID: 'G-VH1WPT8X9P',
+        anonymizeIP: true,
       },
       // algolia: {
       //   apiKey: '',
