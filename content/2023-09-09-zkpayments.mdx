@@ -1,0 +1,160 @@
+---
+slug: state-of-dpn
+title: "ZKPayments: Achieving Privacy and Scalability"
+authors: [satyam]
+tags: [DPN]
+image: /img/dpn/evolution.png
+hide_table_of_contents: false
+---
+![Meme](/img/zkpayments/meme.png)
+
+# Introduction
+
+In the rapidly evolving world of Web3, two critical challenges have emerged: privacy and scalability. The immutable nature of blockchain raises concerns about data privacy for users and businesses, while the increasing popularity of Central Bank Digital Currencies (CBDCs) adds worries about surveillance.
+
+At the same time, achieving scalability in blockchain networks has become vital to handle growing transaction volumes. Amidst these challenges, Zero-Knowledge (ZK) payments offer a promising solution that addresses both privacy and scalability concerns. This blog explores how ZK payments bridge the gap between confidentiality and transparency in Web3 transactions, providing users with the privacy they need without compromising the blockchain's fundamental features. Moreover, it delves into the potential of ZK-based protocols to enhance scalability, making decentralized applications more practical and accessible.
+
+<!--truncate-->
+
+# Understanding the Privacy Challenge in Web3 Transactions
+
+Web3 have enabled a plethora of decentralized applications, DeFi platforms, and NFT marketplaces. However, the transparency of blockchain transactions means that wallet addresses and transaction histories are visible to anyone with access to the network.
+
+Imagine if your traditional bank account was public, and anyone could access detailed information about your financial transactions, including where you spent your money and how much you received. Such a scenario would be alarming and unacceptable to most people, as it would compromise their privacy and security.
+
+Several reasons underscore the importance of privacy in Web3 transactions:
+
+1. Security and Protection: Privacy is vital for safeguarding users from potential hacking attempts, phishing attacks, and other malicious activities like doxing. Shielding financial data ensures that users remain less susceptible to targeted threats.
+
+2. Business Confidentiality: For companies operating in the Web3 space, keeping transaction details private is essential for maintaining a competitive edge and protecting sensitive business information.
+
+3. Individual Rights: Just like in traditional finance, individuals have a right to financial privacy. Web3 should respect and uphold these rights, empowering users to have control over their data.
+
+# The Rise of Zero-Knowledge Payments
+
+Zero-knowledge proofs can be traced back to the original paper of Zero-Knowledge Proofs [GMR85] in 1985. Subsequently, a simplified ZK [K92] proof was presented in 1992. By 2013, zero-knowledge proof could be used in real life, but at a slower pace. In 2016, Groth proposed the Groth 16 algorithm, which greatly reduced computational complexity. Since then, zero-knowledge proofs have gradually been put into real commercial use. 
+
+In context of cryptocurrencies, Monero and Zcash were pioneers in prioritizing privacy in blockchain transactions. Monero (XMR) introduced ring signatures and stealth addresses in 2014, providing a higher level of privacy than traditional blockchains. Zcash (ZEC) emerged in 2016 with zk-SNARKs, offering users the choice between transparent and shielded transactions for a balance between privacy and transparency.
+
+Now, Zero-Knowledge (ZK) rollups and protocols have emerged as a promising solution to address privacy and scalability concerns in Web3 transactions. ZK payments use cryptographic protocols known as zero-knowledge proofs, allowing one party to prove the validity of a statement to another party without revealing any sensitive information.
+
+![transaction](/img/zkpayments/tx.png)
+
+# How ZK enables scalability and privacy?
+
+Imagine you have a magic box that can perform calculations secretly. This box can prove to anyone that a certain statement is true without revealing any details about how it reached that conclusion. That's the basic idea behind Zero-Knowledge Proofs.
+
+Now, let's relate this to blockchain payments. When you want to make a payment using a blockchain, you usually need to show that you have enough money to cover the transaction. In traditional blockchains like Bitcoin, this involves revealing your account balance.
+
+![flow](/img/zkpayments/flow.png)
+
+In basic form, a zero-knowledge proof is made up of three elements: **witness(confidential Info)**, **challenge**, and **response**.
+
+- **Witness**: With a zero-knowledge proof, the prover wants to prove knowledge of some hidden information. The secret information is the “witness” to the proof, and the prover’s assumed knowledge of the witness establishes a set of questions that can only be answered by a party with knowledge of the information. Thus, the prover starts the proving process by randomly choosing a question, calculating the answer, and sending it to the verifier.
+- **Challenge**: The verifier randomly picks another question from the set and asks the prover to answer it.
+- **Response**: The prover accepts the question, calculates the answer, and returns it to the verifier. The prover’s response allows the verifier to check if the former really has access to the witness. To ensure the prover isn’t guessing blindly and getting the correct answers by chance, the verifier picks more questions to ask. By repeating this interaction many times, the possibility of the prover faking knowledge of the witness drops significantly until the verifier is satisfied.
+
+There are currently several popular ZK-based protocols available, including zk-SNARKs (Zero-Knowledge Succinct Non-Interactive Arguments of Knowledge), zk-STARKs (Zero-Knowledge Scalable Transparent Argument of Knowledge), and Bulletproofs.
+
+In the context of blockchain they allow users to prove the validity of a transaction without revealing the real address of the sender. This feature enables batching of multiple transactions into a single proof, reducing the computational overhead and significantly improving scalability. By aggregating multiple transactions into one proof, ZK payments can reduce the burden on the blockchain network and increase the throughput of transactions. This increased scalability can lead to faster confirmation times and lower transaction fees, making decentralized applications more practical and accessible for users.
+
+What are zero-knowledge proofs (ZKPs)? https://ethereum.org/en/zero-knowledge-proofs/
+
+Zero-knowledge rollups? https://ethereum.org/en/developers/docs/scaling/zk-rollups/
+
+![landscape](/img/zkpayments/landscape.png)
+
+# Case Study - ZkBob
+
+zkBob is a privacy-focused application that utilizes zero-knowledge proofs (zkSNARKs) and stablecoins for confidential transactions. Its core parts include the zkBob contract for handling transactions, BOB tokens with privacy features, a Relayer for secure transfers and gas fee abstraction, an AccessManager for access control, and a UI for user interaction. It ensures private transactions and base layer neutrality. 
+
+Let's walk through a scenario involving Alice and Carl using zkBob for a private transaction.
+
+**Situation:**
+Alice wants to send a transaction to Carl without revealing the transaction details such as the amount, sender, or receiver information. They decide to use zkBob to achieve this privacy.
+
+### Transaction Process
+
+1. **Creating Accounts:**
+    - Alice and Carl each create their zkBob accounts using their private keys.
+    - These private keys are used for generating proofs, accessing balances, and performing transactions.
+2. **Generating Addresses:**
+    - Alice generates a new private zkBob address through the application's UI to receive the incoming transaction.
+    - This address is unique to this transaction and cannot be linked to Alice's main account.
+3. **Deposits:**
+    - Alice initiates a deposit transaction from her regular Ethereum wallet to the zkBob Pool contract.
+    - She approves the contract to access her funds and then completes the deposit.
+4. **Transfer Request:**
+    - Alice wants to send a private transaction to Carl.
+    - She generates a zk-proof for this transaction using her private key and the zkBob application.
+5. **Relayer Interaction:**
+    - Alice sends the zk-proof anonymously to a relayer, a trusted intermediary.
+    - The relayer receives this proof and processes it without knowing the details of the transaction.
+6. **Transaction Publication:**
+    - The relayer publishes the transaction to the zkBob contract without revealing the specifics of the transaction.
+    - The zkBob contract verifies the zk-proof and updates the transaction details without disclosing the amount or participants.
+7. **Receiving Transaction:**
+    - Carl, on the receiving end, generates a new private zkBob address through the application's UI to receive the incoming transaction.
+    - This ensures that his receiving address is not linked to his main account.
+8. **Transaction Completion:**
+    - The zkBob contract updates the balances for both Alice and Carl without revealing the transaction details.
+    - Carl can now see that he has received a transaction, but the transaction details remain private.
+9. **Withdrawal Option:**
+    - If Carl wants to use the received transaction in a public setting, he can initiate a withdrawal transaction.
+    - This withdrawal will generate a zk-proof showing ownership of the transaction, allowing him to convert it to a publicly usable form.
+    
+Throughout this process, the transaction details, sender, and receiver information remain private due to the use of zero-knowledge proofs (zkSNARKs). The relayer ensures that transactions are processed without revealing sensitive details, and the zkBob contract maintains the integrity of the transaction while maintaining privacy for the users involved.
+
+![zkbob](/img/zkpayments/zkbob.png)
+
+# Case Study - WaaS Pay
+
+WaaS Pay is a smart contract account deployment platform, utilizing the Safe{Core} Protocol Kit and Safe{Core} Account Abstraction SDK, designed for organizations seeking instant blockchain payments while prioritizing privacy. It offers a user-friendly, no-code interface to customize smart contract account features, such as Social Logins, fiat on/off ramps, and gasless transactions for recipients. With zkBob facilitating anonymous transactions through Zero-Knowledge Proofs (ZKPs), WaaS Pay ensures sensitive financial data remains secure and confidential. Powered by Polygon zkEVM, the platform guarantees scalability and efficiency, while a self-hosted IPFS node with Helia safeguards sensitive metadata. 
+
+For more info: https://ethglobal.com/showcase/waas-pay-br0qs
+
+# Advantages of ZKPayments
+
+1. Enhanced Privacy: ZKPayments offer a high level of privacy by keeping transaction details confidential, protecting users from potential privacy breaches and data exploitation.
+
+2. Improved Security: With sensitive transactional data concealed, users are less exposed to targeted attacks, ensuring a safer and more secure environment for conducting Web3 transactions. *For ex. ZKPayments can help mitigate the issues of frontrunning and maximizing extractable value (MEV) that are prevalent in web3.*
+
+3. Transparency and Compliance: ZKPayments strike a balance by providing transaction transparency to relevant parties while preserving user privacy. This helps businesses meet regulatory compliance requirements without sacrificing confidentiality.
+
+4. Enhanced User Experience: The reduced computational requirements of ZKPayments translate to lower transaction fees and increased scalability. These usecases coupled with ERC4337 as seen in the above case study offers users and businesses a smoother experience, encouraging higher adoption rates and usage.
+
+# Major UseCases
+
+1. **Confidential Personal Transactions:** These protocols ensure private purchases and payments without revealing financial details to third parties, ensuring utmost privacy.
+2. **Privacy-Preserving Token Swaps:** These protocols enable private token swaps, safeguarding trading history and holdings for enhanced financial privacy.
+3. **Private Crowdfunding Campaigns:** With these protocols, crowdfunding campaigns maintain contributor anonymity while transparently disbursing funds, ensuring a trusted and private fundraising process.
+4. **Private Payrolls:** These protocols allow businesses to make discreet payments to contractors or employees, protecting payment amounts and recipient details.
+5. **Audited Rewards for Contributors:** These protocols streamline private multi-transfers, ensuring confidentiality while auditing contributions.
+6. **Open-source Fundraising and Grants:** These protocols offer secure and private token requests from investors, verifying funds' safety with proof of solvency, while maintaining transaction confidentiality, fostering trust in fundraising and grants management.
+
+# The Challenge
+
+Zero-Knowledge (ZK) payments offer private Web3 transactions but pose compliance challenges. Meeting AML/KYC requirements, tax compliance, sanctions screening, data retention, cross-border regulations, and addressing criminal usage are crucial. Collaboration with regulators, dynamic compliance, and robust security can ensure responsible usage. ZKPayments reshape digital finance while safeguarding user privacy and adhering to the law.
+
+# How to address compliance? A Case Study (zk.money)
+
+To ensure legal compliance with UK laws and regulations, Aztec Network implemented a comprehensive approach that strikes a balance between privacy and deterring illicit activities on their privacy-focused DeFi dApp, zk.money.
+
+Practical Deterrence Approach:
+
+- Ensure users have access to privacy on-chain while deterring money laundering and illicit activity.
+- Current effort: Per-transaction deposit limits on http://zk.money.
+
+Initiatives:
+
+- System-wide daily asset deposit caps.
+- IP-specific deposit rate-limiting.
+- Single-address pending deposit caps.
+- Constraints on the escape hatch window.
+- Slow deposits and withdrawals.
+- Identify at-risk addresses easily.
+- Prevent illicit users from bypassing Falafel, Aztec's rollup.
+
+# Conclusion
+
+In conclusion, ZKPayments offer a transformative solution to the growing demand for privacy-focused and scalable options in Web3 finance. By seamlessly blending privacy and transparency through zero-knowledge proofs, users can conduct secure and efficient transactions while preserving their sensitive information. With a commitment to compliance and user-centric principles, ZKPayments pave the way for a decentralized future that prioritizes privacy, fosters trust, and reshapes the digital finance landscape responsibly. Embracing ZKPayments opens the door to a more secure and user-friendly web3 ecosystem, promising a brighter and more inclusive financial future for all.
