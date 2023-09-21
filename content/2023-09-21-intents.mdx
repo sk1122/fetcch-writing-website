@@ -1,0 +1,418 @@
+---
+slug: all-you-need-to-know-about-intents
+title: "All you need to know about Intents"
+authors: [satyam]
+tags: [intents, account-abstraction]
+image: /img/intents/drake.png
+hide_table_of_contents: false
+---
+![Untitled](/img/intents/drake.png)
+
+The history of tech shows us that improving user experience is always a top priority. We can see this in how Web2 user interfaces have changed over time to make things easier for users. In the beginning, people used Command Line Interfaces (CLI) where they had to know exact commands to make things work. This could be tricky. Then, Graphical User Interfaces (GUI) came along with pictures like icons and windows, making things more user-friendly. And it didn't stop there. The next big thing was Natural User Interfaces, which let people use touch, voice, or hand movements to interact with their devices. This made using tech feel even more natural and simple.
+<!--truncate-->
+
+
+## 1.0 What is Intent?
+
+The move to Web3 marked a big change from the usual Web2 setups. It's all about decentralized systems thanks to blockchain tech. Instead of just passing information back and forth, Web3 transactions are like permanent notes on digital ledgers that can't be changed. These actions are guided by smart contracts, kind of like self-executing agreements, and they get their trust from agreement among many people, not just one big authority.
+
+But, even though Web3 transactions are cool, they have limits. Smart contracts can be a bit rigid, which can sometimes make it hard for users to do what they want. That's where "account abstraction" comes in. It's like a middle layer that translates different user actions so that smart contracts can understand and work with them.
+
+And that's where the idea of "intent" comes in. Instead of spelling out every little detail of a transaction, users just say what they want to achieve. This is a big change in how we interact with systems. Old-style transactions are like strict instructions, while intents are more flexible. An intent is like saying, "Here's what I want to do," without getting into all the specific steps. Then, special systems called 'solvers' figure out how to make that intent happen in the best way possible.
+
+## Why are they getting attention right now?
+
+### **Current Buzz and the Underlying Reasons**
+
+The Web3 space is currently abuzz with discussions on 'intents', with an enthusiasm evident among developers, businesses, and enthusiasts alike. But what is driving this surge in attention towards a seemingly age-old concept? To understand this, we need to delve into the multifaceted dimensions contributing to the contemporary relevance of intents.
+
+### **Historical Context: Intents are Not New**
+
+Uma Roy's insights into AA (4337) expands this perspective. While AA (4337) has been addressing specific user intents—like facilitating gas payments in any chosen token, enabling gasless transactions, and batching multiple operations—it's evident that these actions are specialized instances of what we now broadly term 'intents'.
+
+Contrary to popular perception, the idea behind 'intents' isn't a novel innovation. Historically, intents have served as underlying mechanisms in various computational processes, acting as user directives translated into actionable tasks. What has changed is the nomenclature and the granularity of their application.
+
+Similarly, platforms like CoWSwap have been instrumental in demonstrating the power of intent-driven operations. The recent launch of UniswapX further underscores the industry's shift towards embracing this paradigm. In essence, what we're witnessing is a move from niche, specialized intent applications to a more generalized, versatile intent framework that can be universally adopted.
+
+### **Addressing Centralization Concerns**
+
+One cool thing about focusing on intents is that it helps solve a big problem in the decentralized world – centralization. Usually, finding the right people to trade with uses centralized ways, which isn't very decentralized. But with intents, there's a better way.
+
+By utilizing intents, the process of matching parties for transactional purposes becomes more streamlined, dynamic, and decentralized. It shifts the dependency from central servers or order books to a more distributed system where intents, expressed in natural language or structured formats, guide the matchmaking process.
+
+### **Enhancing User Experience (UX) in Web3**
+
+Web3 is all about making users more powerful, and intents help make that happen. As platforms focus on being easier to use, intents step in to make things less confusing.
+
+By allowing users to express their transactional or computational desires in more familiar terms—be it natural language or a simplified command structure—intents reduce the learning curve associated with blockchain interactions. This focus on enhancing UX, combined with the technical advancements in the intent processing mechanisms, is a testament to the industry's commitment to making decentralized systems more accessible and efficient for all users.
+
+In the end, even though the idea of intents isn't new, it fits really well in the Web3 world. It can make things work better, make them less controlled by one place, and help people use decentralized apps and platforms easily.
+
+### 1.1 Transactions vs. Intents: A Technical Perspective
+
+**Transactions** in the blockchain landscape are *declarative* in nature. Fundamentally, they act as clear and specific instructions, mirroring a user's precise command. More technically, transactions can be visualized as calls to predetermined smart contract functions, accompanied by a fixed set of parameters. These parameters define the dual aspects of the interaction: the desired outcome and the exact pathway to achieve it.
+
+To understand:
+
+- When a user explicitly mentions, **“I want to swap 10 MATIC for USDC using Uniswap,”** it's a clear-cut transaction. The dual elements are present: the targeted outcome (exchange 10 MATIC for USDC) and the designated method (via the Uniswap protocol).
+
+![Normal Transaction](/img/intents/eoa.png)
+
+On the flip side, **intents** are more flexible. They catch the main idea of what you want, but they don't lock you into a strict plan. They have the job of figuring out the best way to make your intent happen. These clever solvers use their math skills to look at what's happening right now, like how busy the system is and how much things cost. They check things like how many people are using the system, how easy it is to trade, how much it costs to do the transaction, and other important stuff. This helps them decide the smartest way to make what you want actually work.
+
+To make things clear:
+
+- When a user says, **“I want to get the most USDC I can for 10 MATIC,”** they're sharing an intent. The main goal is easy to understand: make the most USDC from 10 MATIC. But, the exact plan isn't clear. This is where the solver comes in. It's like a smart helper. The solver looks at lots of things happening in the decentralized finance world. It checks different places where you can trade and decides the best way to get the most value from your 10 MATIC.
+
+The introduction of intents in blockchain interactions underscores a broader trend towards adaptability. Rather than adhering to a static framework, it champions a model where real-time conditions and user preferences are harmonized to yield optimal outcomes. The intent mechanism, by design, aligns with the evolving needs of users, offering a more responsive and nuanced approach to decentralized transactions.
+
+### 1.2 Delving Deeper into Intent Structuring
+
+Intents can have different structures, but there are two main ways to look at them: Natural Language Processing (NLP) and Defined Structures.  Both serve the goal of translating user intentions into actionable blockchain commands, but they approach the problem from distinct angles. Here's an in-depth exploration of both.
+
+![Matrix](/img/intents/matrix.png)
+
+**1.2.1 Natural Language Processing (NLP): Bridging Layman Expressions and Blockchain Commands**
+
+NLP in blockchain is about making things easy for users. It lets them use regular words instead of complicated blockchain terms. Here's how it works:
+
+- **Understanding Through Contextual Analysis:** NLP systems try to understand what you mean. They might use smart models like BERT or GPT to get this right. The goal is to take what you say and turn it into something the blockchain can do.
+- **Zooming in with Entity Recognition:** Being exact is important. Systems need to tell apart similar words. They might use Named Entity Recognition (NER) to do this. For example, figuring out if you mean 'ETH' for Ethereum or just 'eth' like a regular word.
+- **Interpreting Syntax and Semantics:** It's not just about words but how they relate to each other. Stuff like 'send ETH to Alice' or 'receive ETH from Alice' is different. Things like dependency parsing help NLP get this.
+- **The Importance of Feedback Loops:** Since blockchain actions can't be undone, it's a good idea to double-check. Systems can take what they think you mean and ask you to confirm before actually doing anything.
+- **Adapting with Continuous Learning:** Blockchain words change a lot. NLP models need to learn new words and phrases. They do this through something called transfer learning, which helps them stay up to date.
+
+**1.2.2 Defined Structures: Crafting a Predictable and Intuitive Interface**
+
+While NLP is about flexibility, defined structures bring a clear and simple approach:
+
+- **Crafting Intuitive Templates:** The main idea is to have user-friendly templates. Imagine filling out a form online. Users just put in the values they want. It's like setting filters or picking options.
+- **Ensuring Input Integrity with Validation:**  After users fill things out, it's important to make sure the information is right. This means checking if numbers make sense, the right types of info are used, and everything fits the rules.
+- **From User Input to Blockchain Actions:** Once the info is good, it's time to change it into something the blockchain can do. This means taking what users entered and turning it into specific things that blockchain programs can understand.
+- **Guiding Users with Error Handling:** Sometimes, things won't match perfectly. When that happens, the system needs to help users out. It could suggest different actions or ask questions to clear things up.
+- **Growing with Modular Expansion:** As new things show up in the world of blockchain, the system should be able to handle them without big changes. This means designing things to be easy to add to or change later.
+
+1.2.3 **Decentralized Counterparty Discovery: Transactional Matchmaking**
+
+Before, finding people to trade with used to rely on central systems which has usually depended on centralized order books. But now, things are changing a lot with the idea of 'intents'. This change is all about moving away from central control and becoming more decentralized. 
+
+To understand the decentralized part better, Think of the mempool as a busy 'waiting room' for transactions just like order books in centralized landscape. Mempool is a key part of decentralized systems. When transactions come into the mempool, smart algorithms help rank and match them based on things like their value, the gas fees they offer, and when they were made. There's also a built-in safety feature called collision avoidance. This makes sure that once an intent has found its match, it won't get matched again, keeping the system smooth and trustworthy.
+
+The next big part of this system is the solver network. Some top projects, like Anoma, show just how powerful this can be. In this network, a group of solvers work together, looking at potential matches and working at the same time to be as efficient as possible. The cryptocurrency world can change fast, so these solvers use flexible strategies that can adjust to the market's real-time changes. To make sure they find the best matches, these solvers work together, combining their findings to confirm the perfect match.
+
+When we think about how this works in real life, NFT sales on platforms like OpenSea provide a good example. Usually, when someone lists an NFT for sale, the platform's centralized server is where the match between buyer and seller happens. If you are using Opensea and want to sell your NFT, then somebody needs to buy that NFT, this is order matching and happens on a centralized server. But with 'intents', there's a fresh approach. Instead of using a central server, the system finds and matches buyer and seller intents right in the mempool. This leads to a secure on-chain transaction. So, buyers and sellers are matched without needing a central server, a major shift from the traditional way.
+
+## 3.0 Intents and Their Interaction with LLMs
+
+### 3**.1 The Natural Language Dilemma**
+
+Intents are really flexible because they use how people naturally talk. They let us express what we want to do in a way that's easy to understand, like chatting with a friend. This way of designing isn't just about making things easier – it's about creating a way for computers to understand us in a more human-like way. It's like when we use search terms or tell a computer what to do in everyday language.
+
+But there's a challenge. The systems that work with Web3, like solvers, usually need things to be super clear and exact. They're like machines that follow strict rules. They can't handle the kind of flexible language that humans use. It's kind of like turning a complex computer program into simple machine instructions – it's not easy.
+
+Human language has a lot of meanings and ways of saying things. This makes it hard for solvers to understand. So, it's like needing a smart translator that can turn what we say into something that solvers can easily understand and work with.
+
+### 3**.2 Bridging the Gap with LLMs**
+
+In computer science, compilers bridge the gap between high-level programming languages and machine-understandable code. Now, let's bring this idea to the Web3 world and talk about large language models (LLMs). They do something similar, but for natural language. Think of LLMs as really smart assistants that understand and work with how we speak. Their foundational architecture, built upon layers of neural networks and vast linguistic datasets, empowers them to dissect, analyze, and transform the multifaceted structures of human language.
+
+Unlike basic language tools, LLMs go really deep into how language works. They don't just look at how words fit together – they understand what words mean and the situation they're used in. They're like language detectives.
+
+![19.png](/img/intents/intent-llm.png)
+
+LLMs are super good at figuring out what someone wants, even when it's not very clear. In context of Intents, lets understand it with an example shown above.
+
+In this example, the intent "Send 10 USDC to 0xAlice" is processed by the (LLM) into a transaction array. Here, the array contains details like the contract address, function ID (e.g., SEND_ERC20 represented by 0x01), the amount in ERC20 tokens, the target EOA address, and any native tokens to be sent. The parsed data is then forwarded to the resolver. If sufficient funds exist in the user's wallet, a transaction is prepared and sent back for user confirmation, with the gas fee sponsored by the Paymaster.
+
+### 3**.3 The Need for Specialized LLMs**
+
+Large Language Models (LLMs) are versatile but may not be ideally suited for the nuanced requirements of the Web3 ecosystem. Given that Web3-specific language and interactions are relatively nascent, there's a need for LLMs that specialize in certain Web3 domains. These specialized LLMs are not generic language processors; they're fine-tuned to understand the intricacies of certain areas in web3. Through targeted training, they become adept at translating human language into precise instructions that Web3 solvers can understand and execute.
+
+As the Web3 space evolves, the role of these specialized LLMs becomes increasingly crucial. They bridge the gap between human intent and machine action, ensuring that the language users deploy aligns seamlessly with the specific requirements of Web3 solvers. In the future, these specialized LLMs can be expanded to cover a broader array of transactions, and there will be resolvers finely tuned for specific types of transactions, as opposed to having a one-size-fits-all resolver. This allows for more efficient and accurate interactions within the Web3 environment, reinforcing a collaborative effort between humans and computers to navigate this complex landscape.
+
+---
+
+## 4.0 **Understanding the Intents of Blockchains**
+
+In the decentralized realm of blockchains, a revolutionary shift is underway: the emergence of 'intents'. At the crossroads of human desires and actionable outcomes on distributed networks, intents are reshaping our interaction with the Web3 space. To appreciate the transformative potential of intents, we must journey from the abstract wishes of the users to the precise actions of the blockchain infrastructure.
+
+### 4**.1** How do they work?
+
+![20.png](/img/intents/intent-example.png)
+
+4**.1.1 The User’s Vantage Point: Intents as Directives**
+
+Within the decentralized framework, an intent crystallizes a user's aspiration or desire. It serves as the conduit, translating a user's wish into actionable tasks on the blockchain.
+
+Intents serve two primary functions for the user:
+
+- **Simplicity and Abstraction:** By distilling complex blockchain operations into understandable directives, intents empower users. They can articulate their desires without being mired in the intricacies of execution.
+- **Diverse Modes of Expression:** Every user is unique, and so is their comfort level. Recognizing this, the system offers varied mediums to express intents:
+    - **Conversational Ease:** Through natural language, users converse with the system, much like instructing a digital assistant.
+    - **Graphical Interactions:** User Interfaces (UI) provide intuitive visual pathways, allowing users to graphically chart out their desires.
+    - **Technical Precision:** For those conversant in code, programming languages offer an avenue for detailed and customized directives.
+    
+
+4**.1.2 Infrastructure's Interpretation of Intents**
+
+Beyond the user's abstract directive lies the technical realm of the blockchain infrastructure. Here, intents are no longer just wishes; they become commitments awaiting execution.
+
+- **From Wishes to Commitments:** The infrastructure translates intents into codified commitments that mirror the user's preferences. These commitments, structured and standardized, are pivotal for the next phase: the solvers.
+- **Enter the Solvers:** In our restaurant analogy, if intents are orders, then solvers are the master chefs. Their task? Deciphering the best strategy to fulfill an intent. This journey isn't always linear. A single intent can branch out into multiple transactions. Conversely, multiple intents might converge into one, optimizing resources.
+
+4.1.3 **User to Transaction Journey**
+
+Navigating the decentralized space from a user's intent to its realization as a transaction requires traversing a series of meticulously designed steps. The journey's genesis lies with the user, who brings forth a specific directive or desire to interact with the decentralized ecosystem.
+
+![Intent Design](/img/intents/intent-design.png)
+
+a) **Intent (User’s Perspective)**
+
+- **Nature of Articulation:**
+    - **Natural Language:** For many, expressing desires is as simple as having a conversation. This is where they articulate their intent in everyday language.
+    - **Conditions/Preferences:** For those seeking a more precise interaction, predefined conditions or specific stipulations become the tool of choice.
+    
+
+b) **Server (Solver)**
+
+- **Channels of Communication:**
+    - **Direct Relay:** Users, if they so choose, can directly transmit their intent to a designated solver, ensuring a one-to-one interaction.
+    - **Public Intent Mempool:** As an alternative, users can leverage communal spaces like the Public Intent Mempool. Here, they broadcast their intents, waiting for an interested solver to pick them up for further processing.
+    
+
+c) **Intent (Solver’s Perspective)**
+
+- **Decoding Linguistic Expressions:**
+    - Should the user choose to communicate in natural language, solvers engage specialized Large Language Models (LLMs). These LLMs bear the responsibility of transforming everyday linguistic expressions into discernible programmatic preferences.
+- **Structured Presentation:**
+    - Post the decoding process, these preferences are precisely structured, ensuring they're in a format that the solver's system can readily understand and act upon.
+    
+
+d) **Solving Intent**
+
+- **Feasibility Analysis:** Before diving into action, solvers undertake a preliminary assessment. They evaluate whether they possess the resources and capabilities to address the user's intent.
+- **Pathway Design:** If the solver determines the intent as actionable, the next phase involves strategizing. Here, the solver delineates the transaction path that will lead to the desired end state as articulated by the user.
+
+e) **Transaction/UserOp**
+
+- **Crafting the Action:** With a strategy in place, the solver crystallizes it into a tangible form: a transaction or a user operation. This, then, is relayed to the user for their review and subsequent execution.
+
+f) **Auction (Decentralized Solver Networks)**
+
+- **The Competitive Landscape:** In decentralized environments, where multiple solvers are at play, the game takes a competitive twist. Each solver presents its solution, laying out its merits.
+- **User's Choice:** Empowered with multiple proposals, the user makes the final selection. Their decision might be influenced by various factors, be it the cost of execution, the speed of realization, potential token returns, or any other metric of value to them.
+
+## 5.0 **The Solver: A Deep Dive into Its Technicality and Functionality**
+
+### 5.1 **Introduction to Solvers:**
+
+*Solvers* represent specialized software modules that are designed to process and execute a specific type of intent. They are like specialized 'intention decoders' that decipher users' requirements and help execute them.
+
+**Example:** Consider solvers as translators. If someone speaks in French and the listener understands only English, the translator (or solver) steps in to translate the French intent into actionable English.
+
+**5.1.1 Types of Solvers:**
+
+- **DeFi (Decentralized Finance):** Manages intents related to financial operations on decentralized platforms.
+- **NFT (Non-Fungible Tokens):** Deals with intents concerning unique digital assets.
+- **Payments:** Specializes in facilitating and executing payment transactions.
+
+*And many more…*
+
+### 5.2 **Operational Mechanism of Solvers:**
+
+In the decentralized ecosystem, solvers act as the backbone, decoding user intentions and converting them into tangible transactions. But what makes them tick? Let's peel back the layers.
+
+![Solver](/img/intents/intent-solver.png)
+
+a) **Understanding through Integration:**
+
+Solvers are a marvel of integration, bringing together various APIs and contracts to serve a specific domain. For instance, a DeFi solver is a symphony of protocols - from Uniswap's swapping mechanics to Aave's lending dynamics, each integration harmonizing to create a platform that can understand and fulfill a myriad of user requests. This vast integration ensures that when a user projects an intent, solvers are not just listening; they're equipped to act.
+
+b) **The Art of Decoding Intent:**
+
+Decoding a user's intent is much like understanding the myriad of requests in a web3 transaction. The solver dissects this information, treating each layer as a separate entity to be addressed.
+
+*Example: If a user desires to swap Ethereum (ETH) for DAI and then lend that DAI on a platform, the solver interprets this by dividing it into two distinct tasks: swapping and lending.*
+
+c) **Mapping the Transaction Journey:**
+
+Following this recognition, a solver then crafts an internal roadmap. This isn't merely a to-do list but a precisely structured blueprint, detailing every action, every step the user wishes to undertake. It's akin to plotting a journey, ensuring every destination (or in this case, action) is accounted for.
+
+d) **Choosing the Right Vehicle (Protocol) for the Journey:**
+
+With the roadmap in hand, the solver faces its next challenge: determining the best mode of transport for each leg of the journey. In simpler terms, it selects the optimal protocol for each action. Why use Uniswap for a swap when CoWSwap offers a better rate? Or why opt for MakerDAO when Aave promises better returns on a lending endeavor? These decisions, driven by factors such as gas fees and liquidity, ensure the user's journey isn't just completed, but optimized.
+
+e) **Navigating the Complex Landscape of MEV:**
+
+The decentralized transaction world has its challenges, and one of them is called MEV – Maximum Extractable Value. This is about miners getting extra profit by controlling the order of transactions. But smart solvers turn this challenge into a win-win. They use MEV to give users a share of the profits, especially in situations like auctions. Picture this: solvers competing to win over a user by offering them the best piece of MEV. It's not just about doing a transaction; it's about making it worth it for the user.
+
+So, solvers do more than just help transactions happen. They're like clever partners, using their deep connections and sharp understanding of the decentralized world to make sure users get the best and most beneficial transaction experience.
+
+### 5**.3 Challenges and Proposed Solutions**
+
+**a. Validation Concerns:**
+Solvers act as third-party software modules within the decentralized system. Trusting the transactions they generate can be risky, especially given the complex nature of web3 transactions. The sheer number of protocols and potential operations makes blind trust a precarious approach.
+
+**Solution:**
+Dry-run validation becomes imperative. Users can utilize platforms like Tenderly or Alchemy to simulate and verify the transaction's output before actual execution. These platforms offer a detailed breakdown, ensuring the transaction utilizes the appropriate token amounts and correctly interacts with the intended protocols.
+
+**Example:**
+Before proceeding with a high-value token swap on Uniswap through a solver, a user might harness Tenderly's simulation capabilities. By doing so, they can ensure that the solver's transaction aligns with their initial intent, checking token amounts, gas fees, and protocol interactions.
+
+**b. The Myth of the 'Generalized Solver':**
+The dream of a universal solver, equipped to handle any and every intent, is tantalizing yet practically challenging. Integrating every possible API and smart contract into one solver would lead to inefficiencies and risks.
+
+**Solution:**
+The path forward lies in specialization. By focusing on domain-specific solvers – be it DeFi, NFTs, or Payments – the decentralized ecosystem can ensure accuracy and efficiency. Each solver, with its specialized integration, can then guarantee an optimized user experience within its domain.
+
+**Example:**
+Imagine the intricacies involved in minting an NFT versus staking a DeFi token. Having separate solvers ensures that each action benefits from specialized expertise, minimizing errors and maximizing benefits.
+
+**c. MEV Challenges:**
+MEV introduces a unique set of challenges. Even though solvers construct the transactions, the sequencing remains out of their control. With prior knowledge of a transaction, they could potentially exploit it through front-running or sandwich attacks once it reaches the mempool.
+
+**Solution:**
+To counteract MEV threats, users can employ RPC providers like Flashbots Protect. This shields their transactions from potential MEV exploits in the mempool. An intriguing proposition is the concept of solver auctions. By allowing solvers to bid on delivering the best transaction, users could incentivize them with a share of the extracted MEV. This not only optimizes the transaction but also makes the process lucrative for the user.
+
+**Example:**
+Consider a scenario where a user wants to execute a complex multi-step DeFi transaction. Multiple solvers bid, offering not just optimized transactions but also a percentage of potential MEV profits. The user then selects the solver that provides the best overall value.
+
+In conclusion, as the web3 ecosystem evolves, solvers play a pivotal role in streamlining and optimizing user interactions. By understanding their challenges and continuously innovating solutions, the decentralized world can offer a seamless, efficient, and secure experience for its users.
+
+---
+
+## 6.0 Decentralizing Intents
+
+**Why Decentralize Intents? The Crucial Need for Decentralization**
+
+At the heart of the blockchain philosophy is the principle of decentralization, ensuring that power, control, and decision-making aren't concentrated within a single entity. Decentralization enhances security, resilience, and transparency. In the context of intents, decentralization ensures that the users' desires are not in the hands of a single authority, facilitating freedom and choice.
+
+**Infrastructure for Intent: The Building Blocks**
+
+To decentralize intents, one must first dissect the supporting infrastructure:
+
+1. **LLM (Language Learning Model):** Primarily required for intents articulated in natural language. These models interpret and translate users' desires into actionable directives.
+2. **Solver:** This is the linchpin. It's a dynamic system that interprets the intent and decides the best course of action.
+3. **Transaction Validator:** Assures the authenticity and integrity of each transaction derived from an intent.
+
+Among these, the solver is the main component. It's easier to decentralize solvers compared to the others. LLMs need regular updates and training on all nodes to make sure they understand intents the same way everywhere. This is important so that there's no confusion or differences in how different nodes understand user intents. Meanwhile, validators in a decentralized system have to work closely with the decentralized solvers to keep everything running smoothly and make sure the system stays secure.
+
+**Decentralizing the Solvers: The Nuts and Bolts**
+
+*Solvers* aren't just programs; they're specialized entities that use intricate logic to unravel intents. Think of them as taskmasters, each competing to provide the best solution.
+
+![Solver](/img/intents/solver.png)
+
+- **Role as Execution Nodes:** Solvers function as execution nodes. Unlike traditional blockchain nodes, they don't require consensus on the sequencing of intents. This is crucial because the order of solving isn't as important as the solution's effectiveness.
+- **Proof of Work (PoW) Parallel:** The way solvers operate is somewhat similar to the PoW system. Multiple solvers work concurrently to understand an intent, offering users a spectrum of solutions to choose from.
+- **Public Mempool for Intents:** An open database or mempool is in place where intents are stored. When a user inputs an intent, it becomes available to every solver.
+
+![Mempool](/img/intents/mempool.png)
+
+- **Selection Process:** After an intent is broadcasted, solvers aim to provide the best possible solution, either by associating it with existing intents or formulating a unique solution. Users then have the autonomy to select the proposal that meets their needs the most.
+
+The advancements in the realm of blockchain are continuous, with entities like *Anoma* leading the way. One of their notable innovations is the concept of private intents. By leveraging threshold cryptography, Anoma ensures added privacy, allowing specific intents to remain discreet and shielded. This is a testament to the ever-evolving nature of decentralized systems, striving for enhanced user privacy and security.
+
+## 7.0 **Economic Incentivization: Keeping Decentralized Solvers Motivated**
+
+As solvers process users' intentions and turn them into actionable tasks. But for them to continue their work, they need incentivization. Here's a closer look at how we can achieve this:
+
+- **User Fees:** Every time a user wants an intent processed, they could pay a fee. It's a straightforward system: once the solver completes the task, they receive the fee as their reward.
+- **The Token Question:** Thinking about rewarding solvers with tokens? It's not that simple. In traditional blockchains, participants put up tokens as a security measure. But solvers don't operate in the same manner, so using tokens as rewards might not be the right approach.
+- **Reward Challenges:** Finding the best way to incentivize solvers is tough. The typical methods might not fit the bill, and there's a need for innovative solutions.
+- **Avoiding Gatekeeping:** One idea is to use tokens to decide who can be a solver. But this might discourage many from participating, limiting the openness of the system.
+
+Making sure solvers get paid properly in a decentralized setup is a tough task. But, working towards a fully open and honest system is an important goal in this research area.
+
+## 8.0 **Innovations in Intent-Centric Architecture**
+
+In the domain of intent-focused design, certain solutions are notable for their approach to decentralized systems.
+
+### **Anoma**
+
+![Anoma](/img/intents/anoma.png)
+
+Anoma has positioned itself uniquely in the ecosystem. It functions akin to a chatroom for intents, drawing parallels to how Kafka handles data but specifically tailored for intent processing. This approach provides several distinctive features:
+
+- **Topic Subscriptions:** Solvers have the freedom to selectively tune into specific channels or topics. Whether it's Swap, Payment, or Social, they can pick and choose the transactions they wish to handle.
+- **Adaptable Deployment:** One of Anoma's standout features is its adaptability. It's not restricted to a fixed setup. Whether the need calls for a primary layer (L1) configuration or a secondary layer (L2) setup, Anoma is up to the task.
+- **Enhanced Privacy with Threshold Cryptography:** Anoma goes the extra mile in ensuring user privacy. Thanks to its integrated threshold cryptography, users can dispatch private intents. These intents, shrouded in encryption, only become accessible when certain conditions trigger their decryption.
+    - A fitting example is *CoWSwap*. Here, users convey desires like wanting to exchange 1 ETH for 1000 USDC. These desires, or intents, remain under wraps. They only unveil themselves at specific moments, say every half minute, or once a set number of intents, like 20, accumulate.
+
+### **Essential**
+
+![Essential](/img/intents/essential.png)
+
+Essential is building intent-based infrastructure & tooling to accelerate the transition from value extraction to intent satisfaction. They are building several products that will drive the blockchain ecosystem toward an intent-centric future.
+
+**1. DSL for Intent Expression**:
+
+- Introducing a universal domain-specific language (DSL) for standardizing and optimizing intent expression and solving.
+- Spec to be shared with the community for feedback and integration into intent-based projects.
+
+**2. Intent-Centric Account Abstraction Standard for Ethereum and EVM**:
+
+- Creating an Ethereum standard for intent-centric account abstraction.
+- The new standard will offer many benefits similar to ERC-4337 while delegating transaction construction to solvers.
+- Will enable users to leverage intent-based systems on existing EVM chains using familiar platforms.
+- Development is in advanced stages, with community consultation coming soon.
+
+**3. Modular Intent Layer**:
+
+- Bypassing limitations of transaction-centric architectures by developing a native intent-focused protocol.
+- Key benefits:
+    - **Intent-Only Architecture**: Protocol will process only intents, optimizing solver efficiency.
+    - **Orderflow Aggregation**: Flips the traditional information asymmetry, giving power back to users and leveraging solver networks for optimal outcomes.
+    - **MEV Resistance**: Design incentives push value to users, not extractors. Front-running and sandwiching attacks are negated.
+    - **Modularity**: The design prioritizes intent-based execution and ensures adaptability across multiple blockchain environments.
+
+### **Account Abstraction**
+
+Account Abstraction (AA) is frequently perceived as merely a tool for "gasless transactions", "seedless recoveries", and perhaps "rate limits". However, this is a superficial understanding. The true power of AA is deeply embedded in its architectural framework, transforming wallets into portals for intent expression.
+
+- Features like Gas sponsorship, Batching, and Social recovery are all forms of intents. They require a designated executor to carry out or resolve these intents on the user's behalf.
+- In essence, account abstraction is undeniably intent-centric in its design. However, it zeroes in on specific types of intents rather than offering a broader, more generalized intent framework.
+
+### **SUAVE (Single Unifying Auction for Value Expression)**
+
+![SUAVE](/img/intents/suave.png)
+
+SUAVE is an independent network designed to provide blockchains with outsourced solutions, providing two key things:
+
+1. **Mempool Outsourcing**: Users can relay transactions to the SUAVE mempool as an alternative to their primary chain’s public mempool (like Ethereum).
+2. **Decentralized Block Builder**: SUAVE produces blocks (either complete or partial) that can be recognized and incorporated by validators from other networks (for instance, Ethereum proposers).
+
+**Key Architectural Components of SUAVE**:
+
+- **Preference Market**: Here, users articulate their preferences or conditions and link them with a bid, making them synonymous to intents.
+- **Execution Market**: Executing the aforementioned preferences demands the construction of transactions. Executors step in here, hunting for the ideal transaction for a segment of the bid.
+- **Decentralized Block Building**: Executors are vested with the authority to relay complete or fragmentary blocks to diverse blockchains.
+
+The entire process has a defined flow: Users first define their preferences, then commit them to the mempool and assign a reward. Following this, executors design the perfect transaction and implement it on the chosen blockchain. An oracle steps in next, tasked with ensuring the accuracy of the transaction on its target blockchain. Once validated, this transaction is stamped with authenticity on the SUAVE chain. The final step witnesses executors, having done their job, claiming their well-deserved rewards.
+
+**Technical Aspects**:
+
+**EVM Compatibility**: SUAVE is compatible with EVM-based languages, primarily because it is based on an EVM fork. Solidity is a prime example of this compatibility.
+
+A practical example helps in understanding **Preference Illustration**: Think of a user who wants to sell USDC on Ethereum and buy it on Polygon. They will only make this move if it's profitable for them.
+
+**Capabilities of SUAVE**:
+
+- **Role**: SUAVE serves as both a sequencer and block builder for various blockchains. This allows it to handle transactions across different blockchain platforms, setting the stage for Multi-chain Preferences.
+
+Looking into **Multi-chain Preferences**, a user might want one transaction, say 'tx1', to happen on 'chain1'. However, there's a condition: it should only proceed if another transaction, 'tx2', is approved on a different blockchain, 'chain2'.
+
+- **Reward System**: Rewards are given based on specific conditions. Both transactions need to be accepted on their respective chains for the reward to be given. If one fails, the operation stops.
+
+For **Executors**, this system brings challenges. They need to ensure both transactions succeed. If one doesn’t, they lose their reward and must deal with the outcome of the transaction that did go through.
+
+- **Potential Limitations**:
+    - Users could be constrained by SUAVE’s block timing.
+    - If a blockchain's time lapse is 400ms, but SUAVE requires 1s, there could be discrepancies. This is relevant only if intents are registered on the blockchain. However, if the intentions are merely dispersed on the network layer (akin to Anoma), this constraint is negated.
+
+**Current Status**:
+
+This entire structure is still under rigorous research and scrutiny. Future iterations might bring forth modifications in the overarching architecture.
+
+In conclusion, it's important to recognize that blockchains themselves aren't automatically better than other systems. They're a tool with a purpose: to give power to people and break down centralized control. As a community and a force for change, we stand at the brink of a remarkable chance to make this potential a reality. Our collective effort can shape a world where regular people aren't taken advantage of by middlemen, but instead gain the benefits they create. By embracing the philosophy of decentralization and fostering user empowerment, we have the ability to redefine the dynamics of trust, value, and participation in the web3 landscape.
+
