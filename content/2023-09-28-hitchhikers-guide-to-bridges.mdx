@@ -3,7 +3,7 @@ slug: a-hitchhikers-guide-to-bridge-security
 title: "A Hitchhikers Guide to Bridge Security"
 authors: [madhav]
 tags: [cross-chain, bridges]
-image: /img/intents/drake.png
+image: /img/hitchhikers-guide-to-bridges/wormhole.jpeg
 hide_table_of_contents: false
 ---
 
@@ -18,6 +18,8 @@ The primary objective of this post is to illustrate that tokens held on various 
 Bridges are named as the Harbinger of the multi-chain world where supposedly it doesn't matter where your assets are because you will be able to bridge your assets to anywhere but things are not as easy as they seem. First,we need to set some ground rules. At its essence, cryptocurrency bridges aim to address the challenge of achieving fair exchanges between two blockchain networks. This challenge entails ensuring that both parties involved either receive their intended assets, or neither party receives them.
 
 Consider a scenario involving two parties, Ram and Sham. Ram intends to acquire asset X from Sham, while Sham seeks asset Y from Ram. Since both Ram and Sham maintain their assets in separate ledgers, the following transactions must occur: Ram needs to transfer Y from his ledger (Ledger A) to Sham at time t, and Sham must transfer X from her ledger (Ledger B) to Ram which happens when the Trusted third party verifies the commitment and does transaction at time t’.
+
+![Untitled](/img/hitchhikers-guide-to-bridges/math.jpeg)
 
 Now there are two main implementations to achieve this →
 
@@ -35,6 +37,8 @@ Now Bridges 101 is out of the picture, let’s dive into the nitty-gritty of the
 
 As blockchains are isolated state systems there needs to be another system like a bridge that fetches and verifies data of chains and interacts with them which always comes with a certain number of security assumptions and relies on some kind of trusted third party to an arbitrary degree which depends from bridge to bridge but everyone has to rely on something either oracles, relayers, light clients.
 
+![Untitled](/img/hitchhikers-guide-to-bridges/factors.jpeg)
+
 Check out the (Talk by Vaibhav)[https://www.youtube.com/watch?v=b813V2Oqmfs&ab_channel=L2BEAT] if you wanna dive into the differences between liquidity networks and Bridges.Now lets talk about assets and holding the same ones on a different chain.
 
 ## Whenever you move your assets from one chain to another a few things change
@@ -42,6 +46,8 @@ Check out the (Talk by Vaibhav)[https://www.youtube.com/watch?v=b813V2Oqmfs&ab_c
 - Security
 - Nativity
 - Liveliness
+
+![Untitled](/img/hitchhikers-guide-to-bridges/meme.jpeg)
 
 # Security
 
@@ -81,14 +87,21 @@ Now comes the juiciest part of the post, categorizing bridges based on their Arc
 
 Well, to be honest, most of the smart contracts on chains that work as endpoints for bridges are upgradable and controlled by multi-sig wallets but most of them inherit some level of security from their base chains but that line is blurred there have been some debates I was not able to find a good answer.
 
+![Untitled](/img/hitchhikers-guide-to-bridges/multisig.jpeg)
+
 # Bridges and Trusted entities
 
 This part focuses on consensus and verification mechanisms used by messaging bridges and not liquidity networks as networks don't really transfer assets but work like Automated market makers as described above. The security of bridges depends on their trust assumptions and with different architecture comes different attack vectors.
 
 - **External Validators:** Bridges have another set of validators that listen and verify messages from the chains and act as middleware for passing assets, these validators are usually permission nodes whose incentives align with those of the bridge. These are bridges that rely on external Validators, which means that these Validators form a distinct committee separate from the Validators on either the source or destination chain. Depending on the specific implementation, these Validators may employ various methods such as basic MultiSig, run a consensus algorithm (usually from the propose-and-vote category), utilize Threshold Signature schemes, SGX, or secure enclaves like in trusted execution environments etc. Ie
   - **Wormhole:** Wormhole has a set of Guardians that run full nodes for all the blockchains they support and listen to gossip for contracts that interact with its core contracts once one does the relayers relay the message to Guardians who then vote on the validity of the payload. wormhole is a general-purpose bridge that passes arbitrary payload and the token bridge is built on top of it.
+
+![Untitled](/img/hitchhikers-guide-to-bridges/wormhole.jpeg)
+
 - **Light Clients and Validators:** Rather than having an external set of nodes, bridges can run light clients that work on the trust assumption of an honest majority and verify the state transitions without having to run a full staking node or just running a gossip spy which is unable to verify proofs. As most chains run some fork of BFT consensus, a good rule of thumb is to check for a signature quorum by the voting nodes. The approach used for Proof of work chains is to see the canonical chain or the longest one according to the fork choice rule.
   - **LayerZero:** LayerZero is a Messaging bridge that uses a combination of a light client and oracle to verify the state transitions and pass messages. The light clients and Oracle work independently and check each other for fraud detection. LayerZero now uses the polyhedra zk light client which uses the state root for verification of txns.
+
+![Untitled](/img/hitchhikers-guide-to-bridges/lz.jpeg)
 
 If you want to dive into zkBridges, (check out this paper.)[https://arxiv.org/abs/2210.00264]
 
