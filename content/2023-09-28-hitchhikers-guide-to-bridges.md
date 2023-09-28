@@ -1,0 +1,102 @@
+---
+slug: a-hitchhikers-guide-to-bridge-security
+title: "A Hitchhikers Guide to Bridge Security"
+authors: [madhav]
+tags: [cross-chain, bridges]
+image: /img/intents/drake.png
+hide_table_of_contents: false
+---
+
+The primary objective of this post is to illustrate that tokens held on various blockchain networks through different bridges exhibit distinct security profiles and values, despite the fact that their purpose is to represent the same underlying assets.
+<!--truncate-->
+
+## Agenda
+- God didn’t create all bridges the same
+- Security profiles of tokens
+- Trustless or wat? (Bridges and trusted setups)
+
+Bridges are named as the Harbinger of the multi-chain world where supposedly it doesn't matter where your assets are because you will be able to bridge your assets to anywhere but things are not as easy as they seem. First,we need to set some ground rules. At its essence, cryptocurrency bridges aim to address the challenge of achieving fair exchanges between two blockchain networks. This challenge entails ensuring that both parties involved either receive their intended assets, or neither party receives them.
+
+Consider a scenario involving two parties, Ram and Sham. Ram intends to acquire asset X from Sham, while Sham seeks asset Y from Ram. Since both Ram and Sham maintain their assets in separate ledgers, the following transactions must occur: Ram needs to transfer Y from his ledger (Ledger A) to Sham at time t, and Sham must transfer X from her ledger (Ledger B) to Ram which happens when the Trusted third party verifies the commitment and does transaction at time t’.
+
+Now there are two main implementations to achieve this →
+
+# Liquidity Networks
+
+This type of exchange involves inputting a combination of tokens, whether they are the same or different, and receiving a different set of tokens at a specified destination, based on the principle of xy = K. Throughout this trading process, the total value of the liquidity pool remains constant, with the exception of atomic price fluctuations. It's important to note that this mechanism only applies to fungible tokens such as SPL tokens and ERC-20 tokens since liquidity pools are not feasible for other types of assets. An example of this concept is Thorchain, which operates as a liquidity protocol and serves as a cross-chain decentralized exchange (DEX). Thorchain facilitates the bridging and swapping of assets, but it requires that the underlying tokens are interoperable between different blockchains. Since Thorchain operates as a protocol beyond the individual blockchains it connects, it involves governance and voting mechanisms to implement changes to the bridge and its architecture.Liquidity networks typically involve high gas and computational costs due to interactions with multiple smart contracts and liquidity pools.
+
+# Messaging Protocols
+
+Message protocols allow you to transfer arbitrary payloads which could include as the name suggests Messages, tokens, and of course cross chain program invocation the foundation of crosschain interoperability. Since tokens are also storage slots or strings in the general token contract, message bridges allow token transfers. eg Utilizing Wormhole, you have the capability to transfer both assets and messages, ranging from simple "Hello World" greetings to participating in cross-chain governance voting, thanks to the functionality provided by Messaging bridges.Using message bridges is relatively cheap since you only have to transfer a message string and the protocol contract/endpoint on the other chain is able to take care of the rest.
+
+Now Bridges 101 is out of the picture, let’s dive into the nitty-gritty of the so-called " Chains don’t matter era"
+
+> Whenever some says their bridge is trustless, RUN
+
+As blockchains are isolated state systems there needs to be another system like a bridge that fetches and verifies data of chains and interacts with them which always comes with a certain number of security assumptions and relies on some kind of trusted third party to an arbitrary degree which depends from bridge to bridge but everyone has to rely on something either oracles, relayers, light clients.
+
+Check out the (Talk by Vaibhav)[https://www.youtube.com/watch?v=b813V2Oqmfs&ab_channel=L2BEAT] if you wanna dive into the differences between liquidity networks and Bridges.Now lets talk about assets and holding the same ones on a different chain.
+
+## Whenever you move your assets from one chain to another a few things change
+
+- Security
+- Nativity
+- Liveliness
+
+# Security
+
+Let's say you've been experiencing some joy because you've made profits and have USDT (Tether) on a relatively new blockchain called Terra. However, this blockchain has a somewhat questionable reputation, and you start to worry when something suspicious begins to unfold. You might think, "Well, the asset is the same regardless of the blockchain it's on, isn't it?"
+
+The truth is, it's not that simple. When you hold assets on a particular blockchain, it's crucial to understand what underpins the economic security of that blockchain. For instance, in the case of Bitcoin, it's the enormous amount of energy expended in mining to produce each bitcoin. For instance, if it takes 10 kilowatts of energy to mine one bitcoin worth of block rewards, anyone attempting to reverse your work would need to do significantly more work, costing more than the bitcoin itself. This fact discourages potential attackers, making the risk profile of your assets relatively secure from protocol attackers.
+
+Now, with the advent of proof-of-stake mechanisms, such as the one used in Ethereum, every finalized block's economic security is tied to the number of native tokens staked by block producers. At present, this value exceeds $60 billion, which provides a strong indication of security.
+
+This all ties back to the concept of how challenging it is to execute a hard fork or reorganization on a particular blockchain. The more difficult it is, the more secure the blockchain tends to be.
+
+If you happen to hold USDT on both Ethereum and Terra, you can assess the security of your assets by considering the value and amount of tokens staked in the protocol by validators. Crunching the numbers will reveal that Ethereum offers a higher level of security in this regard.
+
+# Nativity
+
+Have you ever wondered about the concept of "wrapped" tokens when you bridge assets between blockchains? Essentially, when a blockchain does not natively support a particular token, a bridge steps in to compensate for it. It achieves this by providing you with a representative token, backed by a promise from the bridge, ensuring a 1:1 correspondence with the token it holds on the native chain you were bridging from. This mechanism is called Lock and release.
+
+Wrapped assets play a significant role in token transactions. For example, Ethereum, they simplify the exchange of assets, such as ERC-20 tokens to ERC-20 tokens. However, when utilizing bridges, it's essential to verify that the bridge indeed holds your tokens on the original chain and to consider its security aspects carefully.
+
+Like for a long time Polygon did not support native USDC so whenever you bridged USDC from eth mainnet to Polygon, Circle was not the one responsible for backing your USDC with 1 dollar but the bridge in this case Polygon POS bridge and you could not redeem your usdc for 1 dollar directly from circle which you should be able to do with other chains.Avalanche bridge and Pulse chain only offer wrapped assets meaning every token you swap becomes an erc20 proxy.
+
+# Liveliness
+
+Liveliness as the name suggests health and functioning in terms of consensus on state transitions and transactions. To a certain point it could also be meant as the chain uptime, the higher the uptime more secure your assets on top of it. Liveliness has been the debate of the century as more and more L2s are propping up, There are doubts about the liveliness and security of withdrawing funds from an L2 back to the mainnet in times of a critical bug or attack.
+
+If I were to boil down all three of these factors and right into a few lines that describe the safety and security here it would be ->
+
+- **Re-org** - Whether a signed or voted-on block be scraped?
+- **Data Availability** - The transaction data was made available at the time of computation and voting by the node validators so that in the future nodes can recreate the state. Data availability is different from having the actual data at an arbitrary instance of time.
+- **Censorship Resistance** - Anyone willing to pay the necessary fees can get their transactions included. This can also have some unthought-of consequences where a rogue agent could just increase the base fee enough that make it inaccessible for a large portion of the users.
+
+We can define these properties of a blockchain by looking at its nodes and consensus mechanism but it’s a bit more complicated for L2s. Layer 2s don't have their own transactions supply, they work as off-chain proving systems for the base layer where they compute the state changes off the mainnet nodes and post the validity proof(zk or optimistic) on the chain to verify the validity. Because of this, they inherit the liveliness of the base layer to a certain point. If you want to head into the treasure chest of l2 security research check out (John's mini books)[https://dba.mirror.xyz/LYUb_Y2huJhNUw_z8ltqui2d6KY8Fc3t_cnSE9rDL_o]
+
+# Trustless or wat?
+
+Now comes the juiciest part of the post, categorizing bridges based on their Architecture and how that affects other factors. The recipe to a good bridge is to make it decentralized (I know a bit cliche) and as trust minimized as possible so that it relies on as least number of off-chain actors as possible as adding more agents only adds it to the level of attack vectors.
+
+Well, to be honest, most of the smart contracts on chains that work as endpoints for bridges are upgradable and controlled by multi-sig wallets but most of them inherit some level of security from their base chains but that line is blurred there have been some debates I was not able to find a good answer.
+
+# Bridges and Trusted entities
+
+This part focuses on consensus and verification mechanisms used by messaging bridges and not liquidity networks as networks don't really transfer assets but work like Automated market makers as described above. The security of bridges depends on their trust assumptions and with different architecture comes different attack vectors.
+
+- **External Validators:** Bridges have another set of validators that listen and verify messages from the chains and act as middleware for passing assets, these validators are usually permission nodes whose incentives align with those of the bridge. These are bridges that rely on external Validators, which means that these Validators form a distinct committee separate from the Validators on either the source or destination chain. Depending on the specific implementation, these Validators may employ various methods such as basic MultiSig, run a consensus algorithm (usually from the propose-and-vote category), utilize Threshold Signature schemes, SGX, or secure enclaves like in trusted execution environments etc. Ie
+  - **Wormhole:** Wormhole has a set of Guardians that run full nodes for all the blockchains they support and listen to gossip for contracts that interact with its core contracts once one does the relayers relay the message to Guardians who then vote on the validity of the payload. wormhole is a general-purpose bridge that passes arbitrary payload and the token bridge is built on top of it.
+- **Light Clients and Validators:** Rather than having an external set of nodes, bridges can run light clients that work on the trust assumption of an honest majority and verify the state transitions without having to run a full staking node or just running a gossip spy which is unable to verify proofs. As most chains run some fork of BFT consensus, a good rule of thumb is to check for a signature quorum by the voting nodes. The approach used for Proof of work chains is to see the canonical chain or the longest one according to the fork choice rule.
+  - **LayerZero:** LayerZero is a Messaging bridge that uses a combination of a light client and oracle to verify the state transitions and pass messages. The light clients and Oracle work independently and check each other for fraud detection. LayerZero now uses the polyhedra zk light client which uses the state root for verification of txns.
+
+If you want to dive into zkBridges, (check out this paper.)[https://arxiv.org/abs/2210.00264]
+
+## Escrows vs Custodians
+
+One important security feature most bridge users overlook is the type of custody the bridge holds over your assets. **Escrows** → The assets are in conditional control of the program and can be revoked. The bridge's smart contract typically relies on predefined logic and if the conditions are not met the assets are returned back to the agents. Though it’s slower, even if the escrow goes rogue the tokens can be transferred back to the owner. **Custodians** → The keeper gets unconditional control over the tokens and users and if gone rogue could steal funds. The user relies on a TTP(trusted third party) rather than the smart contracts.
+
+# Conclusion
+
+This post was the first of a series diving into cross-chain bridges and some of the intricate structures they work on. The goal here was to dive in and set the groundwork of what makes a good bridge. Shoutout to the wormhole team for funding this research.
+
