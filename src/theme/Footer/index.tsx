@@ -118,7 +118,7 @@ function Footer(): JSX.Element | null {
             <div
               className="footer__copyright"
             >
-              <p>Inspired from <a href="https://writings.flashbots.net" target="_blank">Flashbot Writing</a></p>
+              <p>Inspired from <a href="https://writings.flashbots.net" target="_blank">Flashbots Writings</a></p>
             </div>
             {copyright ? (
               <div
