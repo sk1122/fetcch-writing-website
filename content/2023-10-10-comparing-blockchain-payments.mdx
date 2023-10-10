@@ -1,0 +1,183 @@
+---
+slug: comparing-blockchains-for-payments-ethereum
+title: "Comparing Blockchains For Payments - Ethereum & L2"
+authors: [satyam]
+tags: [payments]
+image: /img/blockchain-payments/compare-hero.png
+hide_table_of_contents: false
+---
+
+![Compare](/img/blockchain-payments/compare-hero.png)
+
+In the ever-evolving world of blockchain, various ecosystems have emerged, each offering unique propositions and enhancements. These ecosystems are pivotal for reshaping the way we perceive and handle financial transactions, especially in the payments. A careful examination of their capabilities and trade-offs is crucial for understanding their real-world applications and implications.
+
+In this article, we’ll compare three diverse blockchains: Ethereum & L2 Ecosystem, Solana, and Aptos. Ethereum is a pioneer, introducing the world to smart contracts and decentralized applications. Solana, on the other hand, is known for its high performance and low transaction costs, while Aptos is bringing innovative solutions for scalability and security in blockchain infrastructures.
+
+Our goal is to offer a balanced and impartial comparison of these platforms focusing on their relevance in payment capabilities. Let’s get started.
+
+# Ethereum & L2 Ecosystem
+
+Ethereum, as a multifaceted platform, introduced the world to smart contracts and decentralized applications, laying the foundation for blockchain's diverse applications beyond a mere transactional ledger. However, while its innovations are groundbreaking, Ethereum also brings with it challenges and limitations, particularly when applied to payments. Let’s look into in detail.
+
+## Sequential Execution
+
+Ethereum relies on a sequential execution model where transactions are processed one after the other, limiting the network's throughput upto 30 transactions per second (TPS). For example, during times of network congestion, this can result in delays. 
+
+![Sequential Execution](/img/blockchain-payments/sequential.png)
+
+## Global Fees Market
+
+Ethereum employs a global fees market mechanism, affecting all users, irrespective of the diversity in transaction types and sizes, by the prevailing market dynamics. This was notably evident during the launch of the Bored Ape Yacht Club NFTs in 2021, causing gas prices to surge significantly. This universality in fee structuring renders the platform impractical during periods of network congestion, especially for users requiring to conduct urgent payment transactions. Elevated fees and increased confirmation times make transactions costly and impede Ethereum’s effectiveness for routine payments and remittances. This scenario also creates an environment where transactions from users willing to pay a premium are prioritized, impacting the inclusivity and accessibility of Ethereum.
+
+This shared market structure can make the blockchain virtually unusable for users making payments or other non congested contracts during these peak periods, leading to unpredictability and fluctuation in transaction costs, ultimately affecting the affordability and practicality of using Ethereum for everyday payments.
+
+![](/img/blockchain-payments/evm.png)
+
+## Transaction Finality Speed
+
+Ethereum’s operational dynamics are deeply intertwined with its consensus mechanism, which incorporates a probabilistic approach to transaction finality. Transactions, once recorded have a chance of being reversed if other fork of the blockchain is accepted. we can assume it is finalized once certain number of blocks are past that transactions, in ethereum’s case its 6 blocks
+
+### Brief on Blockchain Forks and Consensus Resolution
+
+Blockchain forks in Ethereum occur when discrepancies arise, creating two divergent chains. These forks, if temporary, are usually resolved by the network choosing the longer, more trusted chain. However, persistent discrepancies can lead to permanent forks, splitting the network. Consensus mechanisms like Gasper play a crucial role in resolving these forks by providing clear rules on block addition and chain selection, and by introducing weak subjectivity checkpoint, ensuring that once a block is confirmed, it cannot be altered or removed, thus preventing chain splits and maintaining network integrity.
+
+![](/img/blockchain-payments/consensus-resolution.png)
+
+### The Probabilistic Nature of Nakamoto Consensus
+
+In this probabilistic framework, transactions are not 100% guaranteed inclusion in the blockchain but are included based on a high probability of permanence. The risk, though minimal, persists, where transactions can be reverted if a competing fork of the blockchain gains predominance. For instance, if Alice transmits 1 ETH to Bob, and relying on the transaction, Bob dispatches the product, there still remains a slender possibility that Alice’s transaction could be reverted, resulting in Bob not receiving the intended 1 ETH.
+
+### Checkpoints: A Layer of Deterministic Inclusion
+
+Additionally, Ethereum employs the concept of checkpoints to fortify transaction permanence. Occurring approximately every 20 minutes, these checkpoints offer 100% deterministic inclusion of transactions, meaning, post the establishment of a checkpoint, the transactions included until that point cannot be reverted, adding an extra layer of security and assurance to the network participants.
+
+## Proof of Stake and Network Dynamics in Ethereum
+
+Ethereum’s operational robustness is significantly influenced by its network availability, determined by the Nakamoto Coefficient. The availability of a network is pivotal, signifying the network’s responsiveness to requests at any given time.
+
+- **Definition of Availability:** A network is deemed available if it can receive a request and respond at any point in time.
+- **Dependency Factors:** Availability is contingent on the number of staked nodes and the quality of the providers running these nodes.
+
+### Ethereum's High Availability
+
+Ethereum boasts one of the highest numbers of actively staked nodes in the blockchain sphere, standing at approximately 4000 as of 17th September 2023. This elevated number is instrumental for enhanced availability, ensuring readiness to accept JSON-RPC queries and respond promptly.
+
+### Client Implementation Post-Merge
+
+Post the Merge, Ethereum operates with two distinct types of clients: Consensus and Execution. The bifurcation in client types is strategic, aligning with the diverse functionalities within the network.
+
+- **Consensus Clients:** Manage consensus and block production, pivotal for maintaining network agreement.
+- **Execution Clients:** Responsible for transaction execution within blocks and proper state updating.
+
+![](/img/blockchain-payments/clients-evm.png)
+
+Source: https://ethereum.org/en/developers/docs/nodes-and-clients/node-architecture/
+
+Ethereum's ecosystem is enriched with diverse client implementations, having over nine execution client implementations and more than five consensus client implementations, reflecting the network’s adaptability and versatility.
+
+### GASPER Protocol and Consensus Mechanism
+
+Ethereum’s consensus mechanism is steered by the GASPER protocol, a fusion of GHOST and Casper, each contributing unique functionalities for network stability and security.
+
+GHOST, as the fork choice algorithm as mentioned in the above section, it delves into resolving forks and determining the longest chain, considering both the primary chain and its subsequent forks, also known as uncle blocks. Casper, on the other hand, enhances block security by adding checkpoints at regular intervals, providing 100% deterministic inclusion to the preceding blocks. This amalgamation in GASPER not only strengthens network reliability but also safeguards against liveness failures, penalizing nodes for inactivity post four epochs.
+
+Read more about it here: https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/gasper/
+
+![](/img/blockchain-payments/gasper.png)
+
+### Transaction Confirmation Time
+
+Ethereum’s block production time stands at approximately 12 seconds per block, a duration considered extensive for a payments chain. However, this doesn’t guarantee that a transaction will be confirmed in 12 seconds, as validators often select transactions from the mempool based on certain preferences. The experience of awaiting transaction confirmation for around 2-3 minutes post tapping the pay button is not optimal, highlighting a critical area for enhancement in Ethereum’s user experience.
+
+## Stablecoins
+
+Ethereum and many of its Layer 2 solutions, such as Optimism and Arbitrum, have native stablecoins like USDC (USD Coin), USDT (Tether), and DAI. These stablecoins are directly issued on the Ethereum blockchain or its Layer 2 counterparts, making them an integral part of these ecosystems. They are maintained and secured within the same blockchain network, providing a high level of trust and security.
+
+### Wrapped Stablecoins on Other L2s
+
+In contrast, some Layer 2 solutions may have wrapped versions of stablecoins. These wrapped stablecoins are not issued directly on the Layer 2 blockchain but are instead tokenized versions of stablecoins from another blockchain, like Ethereum. For example, you might find wrapped versions of USDC or USDT on a Layer 2 network.
+
+### Native vs. Wrapped Stablecoins
+
+The distinction between native and wrapped stablecoins is significant. Native stablecoins are considered more secure because they are issued directly on the blockchain, and there is no third party maintaining liquidity or tokenization on a different blockchain. Users can have greater confidence in the security and integrity of native stablecoins.
+
+Wrapped stablecoins, on the other hand, rely on a third-party entity to maintain the correct amount of stablecoin liquidity on another blockchain. This introduces an additional layer of complexity and potential risks, as users must trust this third party to properly manage the wrapped stablecoin's reserves.
+
+It's important to note that the choice between native and wrapped stablecoins may depend on specific use cases and preferences. Some users may prioritize the security of native stablecoins, while others may find the convenience and availability of wrapped stablecoins on various networks more appealing.
+
+In summary, stablecoins are a critical component of blockchain ecosystems, providing stability and usability. Ethereum and its Layer 2 solutions offer native stablecoins, while other Layer 2 networks may rely on wrapped versions.
+
+## Push towards being a DA layer (EIP-4844 and Dank sharding)
+
+Ethereum is strategically evolving to function as a Data Availability (DA) layer for various Layer 2 solutions (L2s). This transformative shift is illustrated by innovations such as EIP-4844 and advanced sharding mechanisms like Dank Sharding.
+
+## Strategic Transition and Layer 2 Solutions
+
+This role as a DA layer signifies Ethereum's aim to become the underpinning foundation offering data availability to diverse L2 solutions, which are renowned for promising accelerated execution speeds and rapid transaction inclusions at significantly reduced costs compared to Ethereum. However, these promises are largely unfulfilled, as very few rollups have truly delivered on their proclaimed potentials so far.
+
+Ethereum's innovative approach to sharding, represented by Dank Sharding, aims to resolve the limitations and challenges inherent in conventional sharding mechanisms, thereby enhancing network scalability and efficiency. This, coupled with the diversity in Layer 2 solutions, is pivotal for Ethereum's ongoing development, providing a range of solutions suited to various needs and applications.
+
+![](/img/blockchain-payments/l1.png)
+
+### Optimism, Arbitrum, and Fee Fluctuations
+
+Optimism and Arbitrum, while being notable optimistic rollups, exhibit extensive finality times, sometimes spanning up to 7 days, coupled with substantial fee fluctuations. These fluctuations in fees can be primarily attributed to the use of the Ethereum Virtual Machine (EVM), a single-threaded VM, which processes transactions linearly, unable to leverage the full processing capabilities of modern CPUs.
+
+- **Global Fee Markets:** This linear transaction processing forces reliance on global fee markets, as implementing localized fee markets in a single-threaded VM is unattainable.
+
+### Exploration and Innovation in ZK Rollups
+
+ZK (Zero-Knowledge) rollups have been under the spotlight in recent discussions and developments within the blockchain community. Their promise of enhanced scalability and security has sparked a significant amount of interest and investigation. However, a crucial aspect that often comes under scrutiny is the predominant use of Ethereum Virtual Machine (EVM) by most ZK rollups.
+
+### EVM's Provable Challenges
+
+The EVM, with its inherent design and structural complexities, poses substantial challenges in the creation of zk proofs. Its storage structure is constructed in such a way that it is not easily provable, making the construction of zk proofs not just intricate but also less intuitive. This intricate design of EVM demands an extensive amount of computational effort and meticulousness to ensure the accuracy and reliability of zk proofs, complicating the development process and limiting the efficiency of ZK rollups.
+
+### Alternative Virtual Machines and Verification
+
+Given the complications arising due to EVM’s structural design, several rollups, including those developed by Fuel and Starkware, are exploring alternative Virtual Machines (Alt-VMs). These Alt-VM rollups are being designed with a focus on simplifying the verification process. The architectural innovation in these rollups aims to provide a conducive environment for easy verification, thereby overcoming the limitations posed by the EVM's complex structure. These rollups leverage novel approaches and optimized structures to ensure that the verification process is not just efficient but also reliable, enhancing the overall functionality and applicability of ZK rollups.
+
+### Experimentation at Different Layers
+
+It is crucial to recognize that rollups exist as a separate layer atop Layer 1 (L1), emphasizing the necessity for extensive experimentation with various Virtual Machines to address and resolve the foundational issues present in the base layer. This layer separation necessitates a deliberate and informed approach to experimentation, focusing on identifying and implementing optimal solutions to mitigate the inherent challenges of the base layer. By fostering an environment conducive to experimentation and innovation, it becomes plausible to develop advanced solutions that not only resolve the existing limitations but also enhance the overall efficacy and adaptability of the blockchain ecosystem.
+
+## Account Abstraction
+
+Account Abstraction (AA) is a concept in Ethereum where a smart contract wallet is deployed for an Externally Owned Account (EOA), enabling a plethora of functionalities and enhancing user experience in the Ethereum network. It allows for a variety of operations like batching transactions, paying gas in any ERC-20 tokens, reliable recovery of accounts, and much more, adding a layer of flexibility and optimization to user interactions with the Ethereum network.
+
+### Implications of AA in Transactions
+
+While the benefits of Account Abstraction are numerous, its implications are particularly nuanced when it comes to peer-to-peer payments. P2P payments, inherently being single transactions, don’t optimally align with the advantages provided by AA. This is because AA introduces an increased gas requirement for these types of transactions, impacting the efficiency and cost-effectiveness of P2P payments in Ethereum. For instance, sending ETH with an EOA consumes approximately 21k gas, but with AA, the gas consumption nearly doubles, requiring around 40k gas to process the same transaction.
+
+However, Account Abstraction shines when applied to other forms of payments, such as commercial and subscription-based transactions, where multiple transactions are sequenced. In scenarios requiring two or more sequential transactions, AA significantly improves the user experience, optimizing the transaction processing and enhancing the overall interaction with the payment systems.
+
+### Enhancements in Payment Infrastructure
+
+AA also stands out in its ability to enhance pull payment infrastructure. It can employ plugins that automatically approve certain transactions based on predefined conditions, smoothing out the payment experience. This conditional auto-approval facilitated by AA plugins can revolutionize subscription services and recurrent payment systems by automating transaction approvals and ensuring seamless transaction experiences.
+
+In essence, while Account Abstraction escalates the gas requirement for P2P payments, making them less optimal, its application in commercial, subscription, and other multifaceted payment structures proves to be significantly advantageous. It not only improves the transaction experience in sequence-dependent payments but also contributes immensely to refining pull payment infrastructures, paving the way for seamless, automated, and condition-based transaction approvals.
+
+This intricate blend of pros and cons presented by Account Abstraction in various payment scenarios underlines the importance of discerning application and continual refinement to leverage its benefits optimally. It emphasizes the need for a meticulous approach to implementing AA, ensuring that its deployment is strategically aligned with the nature of transactions, to harness its full potential in enhancing user experience and transaction efficiency in the Ethereum network.
+
+## User Experience
+
+Ethereum, despite its pioneering status and extensive capabilities, encounters substantial challenges in delivering optimal user experience, largely due to the inherent limitations and complexities discussed previously. The inherent delay in transaction confirmations, often extending beyond a minute, disrupts user flow and hampers smooth interactions within the blockchain, necessitating advancements in transaction processing mechanisms.
+
+### Impact of Transaction Delays and Solutions
+
+In a scenario where a transaction takes extensive time to confirm, multiple aspects of user flow can be affected, breaking the smooth trajectory of user interactions and compromising the overall user experience. However, the introduction of Layer 2 and Layer 3 solutions (L2/L3s) promises to alleviate these delays, offering quicker transaction confirmation times through soft finalization mechanisms. Although the incorporation of L2/L3s introduces new challenges, especially in onboarding and exiting from these layers, strategic abstraction mechanisms can mitigate these complexities, ensuring a smoother user experience.
+
+### Requirements for a Payment Chain
+
+For any blockchain aspiring to specialize in payments, certain criteria are imperative. The blockchain must ensure swift transaction confirmations, ideally within 15-30 seconds, maintaining a trustless environment where users have unequivocal ownership of their assets, and validators don’t have undue influence or control.
+
+- **Trustlessness and Speed:** These are crucial components for a payment-specialized blockchain, ensuring user autonomy and quick transaction processing.
+- **Ethereum's Limitations:** Based on extensive research, Ethereum, with its current capabilities and structure, falls short of being an ideal blockchain for payments.
+
+### Potential in Layer 2 and Layer 3 Solutions
+
+The Layer 2 and Layer 3 spaces, however, hold substantial promise to overcome these limitations. The advancements in these layers can significantly enhance the peer-to-peer payment experience, especially when both interacting users are situated within the same layer.
+
+Ethereum, although not ideally suited for payments in its current state, is witnessing continual innovations and refinements in the Layer 2 and Layer 3 domains, showing potential for considerable enhancements in user experience and payment interactions. The focus on optimizing transaction confirmation times, abstracting complexities in layer interactions, and maintaining a trustless environment illustrates the ongoing efforts to elevate Ethereum’s capabilities in the payments space.
+
+In the next post, we will discuss about Solana and then Aptos about payments
