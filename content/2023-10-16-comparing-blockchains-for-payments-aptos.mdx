@@ -1,0 +1,127 @@
+---
+slug: comparing-blockchains-for-payments-aptos
+title: "Comparing Blockchains For Payments - Aptos"
+authors: [satyam]
+tags: [payments]
+image: /img/blockchain-payments/compare-hero.png
+hide_table_of_contents: false
+---
+
+Aptos introduces an innovative approach in the blockchain space, harmoniously integrating parallel execution while maintaining a sequential execution experience for developers. 
+
+# Parallel execution with sequential execution experience for developers
+    
+When executing transactions, knowing the specific storage slots a transaction will read from or write to is crucial, especially when multiple transactions are executed in parallel. Aptos, a newer blockchain platform, aims to streamline this process, offering a distinct route that diverges from the traditional approaches seen in blockchains like Solana.
+
+![Aptos](/img/blockchain-payments/aptos.png)
+
+***BlockSTM***
+
+Aptos employs a mechanism known as BlockSTM, which navigates the complexities of parallel execution without needing the initiator to explicitly list the accounts or contracts it will interact with. Instead of relying on provided lists, Aptos simulates the transaction to understand and catalog the contracts and accounts the transaction will address, categorizing them into 'read' and 'read-write' sets. This method allows Aptos to divide transactions into separate lanes and execute them in parallel, enhancing the efficiency of the system.
+
+![BlockSTM](/img/blockchain-payments/blockstm.png)
+
+Block-STM collaborative Scheduler in Aptos
+
+***Predicting the Nature of Execution***
+
+However, this model is not without its challenges. One notable concern is that Aptos cannot determine whether transactions will be executed sequentially or in parallel before running BlockSTM. The system must choose a list of transactions, seemingly at random or through a greedy choice algorithm, simulate them, and then divide them accordingly.
+
+If all chosen transactions end up being executed sequentially, it doesn’t utilize the system to its fullest potential, leading to increased gas usage and a reduction in the system’s overall efficiency. This scenario underscores the delicate balance between improving execution efficiency and maintaining system resourcefulness.
+
+***A Developer-Friendly Approach with Efficiency Trade-offs***
+
+The Aptos model, while innovative, underscores a compromise between sequential developer experience and the efficiency of parallel execution. Developers can interact with the system in a sequential manner, which is often more intuitive, but the underlying mechanism works to optimize and parallelize the execution where possible.
+
+This synergy between parallel execution with a sequential execution experience for developers opens up possibilities for improved transaction processing. However, the uncertainties and challenges in predicting the nature of transaction execution underscore the need for continual refinement and optimization to truly harness the potential of this approach.
+    
+# Fee Markets’
+    
+Aptos has uniquely structured its fee markets, emphasizing base gas fees for every transaction and pioneering an efficient approach to gas consumption. 
+
+**Structured Base Gas Fee**
+
+Aptos allocates a base gas fee for each transaction, governed by three pivotal parameters, namely Instruction, Storage, and Payload. This structure is an indication of Aptos’ meticulous approach to creating a fair and balanced fee market, allowing for transactions to be executed with optimal efficiency.
+
+- **Instruction:**
+It considers the number and complexity of instructions executed in a transaction.
+- **Storage:**
+It accounts for the amount of bytes written and read during a transaction.
+- **Payload:**
+The greater the bytes in transaction payload, the higher the gas fees incurred.
+
+**Comparative Analysis**
+
+By comparing three distinct transactions on Aptos, evident through their respective links [Transaction 1](https://explorer.aptoslabs.com/txn/10741687?network=mainnet), [Transaction 2](https://explorer.aptoslabs.com/txn/134093324?network=mainnet), and [Transaction 3](https://explorer.aptoslabs.com/txn/268170807?network=mainnet), it’s noticeable that the gas units used are progressively decreasing over time.
+
+- In 2022, a `swap_exact_input` transaction required 8611 gas units for execution.
+- By May 2023, the gas units needed had drastically reduced to 56.
+- By September 2023, a mere 15 gas units were needed for executing `swap_exact_input`.
+
+This significant reduction in gas units over time is indicative of Aptos’ relentless pursuit of refinement and optimization, achieving considerable progress in lowering the gas units required to execute a transaction.
+    
+
+# Transaction Finality Speed
+    
+Aptos has implemented a variation of the HotStuff consensus protocol, revolutionizing transaction finality speed. This protocol is a deterministic consensus algorithm, standing in stark contrast to the probabilistic consensus protocols employed by blockchains like Ethereum. Here’s a closer look at how Aptos achieves instant finality and why it matters.
+
+**Deterministic Consensus Protocol**
+
+Aptos’ variant of the HotStuff consensus protocol ensures that every transaction included in a committed block is irreversible. This deterministic approach implies that once a transaction achieves finality, there is absolute certainty about its inclusion in the blockchain, eliminating any possibilities of reversion. This deterministic finality provides a reliable and predictable environment for users and developers, fostering trust in the system's integrity.
+
+**Instant Finality: Why It Matters**
+
+Instant finality in Aptos is not merely a technical enhancement; it is a paradigm shift in user experience and system reliability. In scenarios where transaction certainty is crucial, such as financial exchanges, remittances, or contractual agreements, instant finality reduces risks and uncertainties associated with transaction reversals, ensuring users and developers can interact with the blockchain with assured confidence in the immutability of their transactions.
+
+This immediate finality also alleviates the common pain points experienced by users during interactions with blockchains operating on probabilistic consensus protocols. The users no longer need to endure the agonizing waits associated with transaction confirmations, as finality is achieved instantly, smoothing user interactions and enhancing the overall user experience.
+    
+# PoS
+    
+The PoS mechanism in Aptos is currently fortified by approximately 100 nodes, a number witnessing a gradual ascent. This growth in nodes is crucial as it adds to the network’s resilience and availability, although there’s substantial room for improvement in increasing the count of actively staked nodes. The burgeoning community around Aptos is evolving robustly, promising potential breakthroughs in its developmental trajectory.
+
+**Client Implementation: Singular but Sufficient**
+
+Given its recent inception in 2022, Aptos presently supports only one client implementation. This singularity in client implementation is logical at this stage of its lifecycle, ensuring stability and coherence in its developmental phase.
+
+**Consensus Algorithm: AptosBFT**
+
+Aptos employs a variant of the HotStuff consensus algorithm—AptosBFT, a protocol grounded in Directed Acyclic Graph (DAG) and Quorum Certificate (QC). In this structure, every validator casts a vote on a block proposed by the leader and conveys this vote solely to the leader, culminating in the issuance of a QC. Subsequently, the preceding QC is distributed by the new leader in the next round and is committed to, ensuring deterministic finality to transactions.
+
+**Transaction Confirmation Time: Swift and Reliable**
+
+Aptos has strategically focused on minimizing transaction confirmation time, achieving finalization in less than 5 seconds. This accelerated confirmation is not just a nod to efficiency but is an integral component in enhancing reliability and user trust, allowing users and developers to interact with the platform with the assurance of swift and irreversible transaction confirmations.
+    
+# Stablecoins in the Aptos Ecosystem: Trusting Layerzero
+    
+Within the Aptos ecosystem, the landscape for stablecoins differs from some other blockchain networks. Aptos, while offering a diverse range of blockchain innovations, does not feature native support for stablecoins. Instead, it relies on external entities like Layerzero to provide wrapped stablecoins.
+
+- **Absence of Native Stablecoin Support**
+    
+    Notably, Aptos does not have native support for stablecoins like USDC or USDT. This distinguishes it from blockchain ecosystems that seamlessly integrate these stable digital currencies into their infrastructure.
+    
+- **Layerzero: The Wrapped Stablecoin Provider**
+    
+    In the absence of native stablecoin support, Layerzero emerges as a significant player within the Aptos ecosystem. Layerzero acts as a provider of wrapped stablecoins, bridging the gap between Aptos and other blockchain networks.
+    
+- **Trust in Layerzero**
+    
+    However, this reliance on external entities introduces a unique challenge: trust. Users and transactions within the Aptos ecosystem now depend on Layerzero for stablecoin functionality. This trust requirement adds a layer of complexity and potential security concerns to stablecoin payments within Aptos.
+    
+    Users must trust that Layerzero maintains the proper reserves and acts securely as a bridge between the Aptos ecosystem and the broader blockchain landscape. While Layerzero may provide essential wrapped stablecoin functionality, this dependency underscores the importance of due diligence and security when engaging in stablecoin transactions within the Aptos ecosystem.
+    
+
+In essence, Aptos takes a distinct approach to stablecoins, relying on external providers like Layerzero to facilitate stablecoin payments. While this approach offers versatility, it also necessitates a heightened level of trust and security vigilance within the ecosystem to ensure the integrity of stablecoin transactions.
+    
+# User experience
+    
+Aptos shines in providing a splendid user experience, with a special emphasis on the developer community. It employs the Move programming language, which, despite its current limited developer base, is witnessing exponential growth. The platform guarantees instantaneous and deterministic transaction confirmations, a crucial aspect in user interactions with the blockchain. Aptos is well-positioned to emerge as a prime choice for payments in the blockchain arena, paralleling other leading L1s and L2s, due to its user-centric design and developer-friendly environment.
+    
+# Conclusion
+
+As we dissect the varying dimensions of these ecosystems, it becomes increasingly evident that Ethereum might not metamorphose into a blockchain optimized for payments in the foreseeable future. Despite its pioneering status and extensive adoption, the platform grapples with constraints such as lack of rapid transaction finality and high transaction costs, hampering its evolution as a preferred payments blockchain.
+
+Layer 2 solutions (L2s), with their enhanced soft finality, emerge as plausible candidates for processing payments. However, the journey of L2s is still strewn with challenges and uncertainties. Optimistic rollups, for instance, have not activated fraud proofs, posing significant security risks for transactions, whereas ZK rollups are still traversing their developmental trajectory and have yet to prove their resilience and reliability over time. The prevalent use of centralized sequencers in most rollups introduces a degree of trust and reliance on a single entity, somewhat diminishing the decentralized essence of blockchain.
+
+In contrast, Layer 1 solutions like Solana and Aptos, with their architectural innovations and enhanced transaction finalities, present themselves as more viable alternatives, specifically tailored for payments. These platforms, characterized by their inherent efficiencies and strategic approach to transaction processing, seem to have surpassed their counterparts in aligning with the requisites of a payments-oriented blockchain at this juncture.
+
+In conclusion, while the blockchain space is brimming with innovations and possibilities, discernment and vigilance are paramount. The continuous evolution of platforms brings forth new horizons in blockchain application for payments, yet the selection of a blockchain solution necessitates a careful evaluation of its intrinsic capabilities and the alignment of its features with the specific demands of payment processing.
