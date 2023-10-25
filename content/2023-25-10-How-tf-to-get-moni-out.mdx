@@ -1,0 +1,108 @@
+---
+slug: How to get your moni out(Bridge Security edition)
+title: How to get your moni out(Bridge Security edition)
+authors: [Madhav Goyal]
+tags: [Bridges]
+image: /img/space1.jpeg
+hide_table_of_contents: false
+---
+
+This post is part #2 of my bridges journey where I take readers through asset security in. a cross chain world and how the tech behind these magical structures aka bridges works. Today we wil go down the rabbit hole of
+<!--truncate-->
+
+## Agenda
+- **How to cook your own Bridge**
+- **Isn't ZK the solution to everything?**
+- **How to get your moni back(incase of bridge switch off)**
+
+## How to cook a bridge from scratch
+Well if you are not a chain maximalist spending all your attention and brain power about why some chain is the best, you must have at one point held different crypto assets and maybe even tried to move the same ones across chains just to f*ck around and find out. Well then you have 2 choices, go the old Centralised exchange way or try the risky and more fun path leading to cross-chain bridges but have you wondered how these
+![Untitled](static/img/escape_hatches/image.png)
+
+Hey there, my fellow degens! In today's enlightening session, we'll reveal the mind-blowing concoction of ingredients required to whip up a magical bridge that lets us juggle assets and even the wildest of data across the chaotic abyss of chains. Hold onto your socks, folks, because this is about to get as exciting as watching paint dry!
+First, we need to which ingredients we need and why ->
+
+- **Smart contract on Chain(1)** -> We need a program that can accept proofs or inputs that we provide about the assets we want it to handle and check state changes from other. This is could also be used as the burn/mint contract for assets.
+- **Smart Contract on Chain(2)** -> A program that works as the endpoint for assets and messages on the chain that we want the message/asset relayed from.
+- **Relayer** -> Finally we need some third party that works as the proxy and communication layer between the two chains as every chain is an isolated virtual computer unable to take data unless it fits its model. At this point is when we are able to divide bridges based on what kind of relayer of off-chain third party they use.
+
+And Voila! With just three simple Ingredients you have your own whole new bridge. Smart contracts to receive data on both sides and an agent/system that can relay data.
+
+It's a bit akin to the art of telegraphy—setting up those essential hooks at both ends and linking them with a communication wire. All you need is a sender, a receiver, and a reliable means of transportation.
+![Untitled](/img/escape_hatches/image (1).png)
+
+Relayer is the part where we differentiate between bridges present right now, every bridge has its own approach to transport the messages.
+
+- **Trusted Threshold Network** -> A bridge has its node network that works as a guardian that verify the cross-chain message requests and passes it on to sequencers/relayers that then turn it into a transaction interaction with its smart contracts on the other end.
+    
+    Wormhole and DeBridge both use this approach where agents that are trusted by the creators are entrusted as node operators and will likely benefit from the network. However, there are plans to turn this into DAO-governed bridges.
+    
+- **Light Client Bridges** -> Replacing the guardian node network with a light client that only downloads the headers of the block and able to verify state transitions by relying on the honest majority assumption makes it LC bridge. The smart contract on the receiving end could have something like ``msg.sender`` where only the Deployer Light client is able to verify the state transitions or the network of light clients could be rewarded on posting the fastest proof.
+
+## Doesn't ZK magic solve this?
+
+**[ZK Bridges](https://rdi.berkeley.edu/zkp/uploads/paper.pdf)** -> Using Light clients and an offchain network that produces a Zero-knowledge proof of the state attestations to feed it to the receiver chain allows for a better security model at the cost of computational overhead. We can delve into more precise details by considering the option to generate a Zero-Knowledge (ZK) proof exclusively for the cross-chain messages directed at the bridge's smart contracts. Alternatively, we have the choice to create a ZK proof that encompasses the entire state transitions or even an entire block this to some sort can be tackled by using deVirgo.
+
+But one of the biggest issues remains that ZK curve signatures are supported by the chains, Some chains support ed25519 and other BN254 so developers have to compute zk proofs over different curves in their bridges mechanisms which imposes the complexity of bigger zk circuits, and the required gas costs to verify the signatures/proofs on chains. Some Signatures like Groth16 that have a size of ~130 bytes can take 250k gas units to verify on mainnet while the ones like old zksnarks take 20M gas units which renders it impossible with the compute unit cap leaving the costs aside. One of the ways to solve this is to do recursive proving that allows to shrink the proof size and you are able to verify even the history of the state. 
+One of my open questions was If we introduce more distributed proof generation like with devirgo to introduce a better level of decentralisation in the bridge but how do we maintain a level of incentive alignment between the actors? 
+
+Currently, Gnosis Succinct Bridge and LayerZero are using Zk light clients with different granular implementations.
+
+---
+
+One of the fundamental methods employed by bridge networks for transferring assets between different chains is a process known as "lock and release." In this procedure, assets are initially locked on one chain, and then the equivalent tokens are released on another chain, directly into a designated wallet.
+While the actual transfer of data constitutes a vital component of the bridge, the real value lies in the escrows or smart contracts present on these chains. It's at this juncture that we must exercise caution and make informed decisions when selecting bridges.
+
+To make a clear distinction, we need to understand the difference between "Custodianship" and "Ownership." Ownership denotes full control over arbitrary assets, signifying that the individual possesses complete authority over that asset. On the other hand, Custodianship or escrowing implies that the user maintains ownership of the asset but delegates the custody and management of those assets to a third party.
+
+In light of this distinction, we favor a specific feature for our bridge: the ability to function as an escrow bridge. This enables the bridge to effectively manage our assets while ensuring that it never gains full control over them. Instead, it serves as a custodian or guardian, overseeing and safeguarding our assets without asserting ultimate authority over them.
+
+![Untitled](static/img/escape_hatches/image (2).png)
+
+## **what if the bridge goes rogue?**
+
+As all bridges necessitate the involvement of trusted third parties to interface with diverse blockchains, there's an inherent need for alignment of incentives among these parties and the users, even when employing the mystical power of zero-knowledge proofs. Nonetheless, there remains a lurking possibility that these involved parties could misappropriate user funds and attempt to manipulate the network. This risk is notably challenging in threshold networks like Wormhole and Debridge, where a robust network of nodes is established. However, it's a different story for most L2 bridges, where only a handful of proving nodes exist. In such cases, users lack the capacity to submit fraud proofs to contest transactions that might harm them.
+
+The onus falls entirely upon the teams operating these proof generators and sequencers. While Starknet is making strides towards decentralizing its sequencers and provers as outlined in its roadmap, many other zk and optimistic rollups, despite proclaiming "robust networks" in their grand roadmaps, are yet to make significant progress in this regard. A mechanism called Escape Hatches was introduced where users are able to exit their funds by forcing a state transition transaction of the L2 on L1 where the funds were locked, They usually are either able to submit a fraud proof or merkle tree root to exit.
+
+There are a few ways to exit with escape shuttles →
+
+- **Force Exit L1:** User send a transaction to the L1 that introduces a state change to the L2 bridge smart contract on the mainnet.
+    
+    These transactions can not be censored by the rollup sequencer and like in [Arbitrum](https://docs.arbitrum.io/inside-arbitrum-nitro#inboxes-fast-and-slow) any of these txns are delayed by a day and then executed.
+    
+- **Enqueue L1:** Users can post transactions to exit the assets but they are not guaranteed for execution**.**
+- **Applicative :** As zkrollups usually don’t have the same address so its hard to map them beforehand, for this bridges have to maintain a directory of mapped addresses.
+    
+    In [Starknet](https://community.starknet.io/t/starknet-escape-hatch-research/1108) When a forced transaction is pushed, the L1 contract pings a cross chain message to the address directory on the Starknet.
+    
+
+You can head to [L2Beat](https://l2beat.com/) and check which of the L2 bridges have escape and hatches and how they are deployed but even right now unless you are good at solidity and calling functions on chain it will be super hard to use this functionality.
+
+![Untitled](static/img/escape_hatches/image (3).png)
+
+### **Some Open questions about shuttles**
+
+One of the biggest challenges is that Force exit transactions go through the same pipeline as any other transaction, and in times of high gas or market turbulence, it might not be viable for the user to exit $500 worth of funds by paying $1k to call the escape functions on the chain.
+
+Other than L2 bridges, many cross-chain bridges don’t have any security fallbacks if the trusted committee is down. If while bridging the Trusted third party which is solely responsible for consensus and custody, the assets could be locked as long as the network is back up.
+
+**Which assets to exit?** One of the functionalities I am curious about is whether a user is able to exit specific tokens or standards or whether the whole account state is moved.
+
+You might have a few AAVE positions on an L2 which due to sequencer failure is unable to process new transactions so is there any way to move the AAVE balance and position directly to the mainnet?
+
+If the users just want to exit their ERC-20 or wrapped tokes and not the Native tokens that they bridged?
+
+---
+PS: Big shoutout to yet again making it till the end of my bridge rendezvous, This was a series of 2(till which I planned) on writing about bridge security.
+
+This work was funded by a Wormhole Grant so a huge shoutout to them for giving me the support to work on this!
+
+Next time till then.
+
+## References
+
+- [ZK bridges](https://rdi.berkeley.edu/zkp/uploads/paper.pdf)
+- [Polyhedra Docs](https://docs.zkbridge.com/zkbridge-trustless-cross-chain-bridges-made-practical/proof-systems-of-zkbridge)
+- [State of L2 hatches](https://dicg-workshop.github.io/2022/papers/gorzny.pdf)
+- [Not Quite Water Under the Bridge](https://arxiv.org/pdf/2210.16209.pdf)
