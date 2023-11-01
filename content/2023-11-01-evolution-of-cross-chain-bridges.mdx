@@ -1,0 +1,180 @@
+---
+slug: evolutions-of-bridges
+title: "Evolution of bridges through the time"
+authors: [shivam]
+tags: [Bridges]
+image: /img/escape_hatches/image.png
+hide_table_of_contents: false
+---
+
+# Evolution of Bridges
+
+![Hero](/img/bridges-evolution/hero.png)
+
+In the rapidly changing world of the Web3 ecosystem, a variety of blockchains and layer solutions have come up, each with its own way of ensuring security and trust. This multi-chain setup, driven by the ongoing challenge of scalability, is more than just a trend—it's a new reality that's here to stay.
+
+However, as these different blockchains continue to grow, they face a common problem - they work in isolation, unable to talk to each other natively. This is where interoperability becomes important. At the heart of this interoperability are cross-chain bridges: smart systems that act as connectors. They help in the smooth transfer of different kinds of data – from assets and contract activations to proofs and state changes – across different blockchain networks. In this article, we will explore the details of these bridges, the complexities in their design, and what the future holds for them.
+
+<!--truncate-->
+
+## What are Cross Chain Bridges?
+
+![cross-chain](/img/bridges-evolution/bridge.png)
+
+At its core, a cross chain bridge is a system that facilitates inter-blockchain communication for the transfer of various types of data. This data can range from assets like tokens, to contract invocations, proofs, or even state updates. These bridges act as intermediaries, ensuring that two or more blockchain networks, regardless of their underlying differences, can understand and communicate with each other.
+
+The operational process behind these bridges is both intriguing and ingenious. When an asset is transferred from one blockchain (source chain) to another (destination chain), the asset on the source chain is either locked or burned. This process ensures that the asset is no longer accessible or usable on the source chain. Once this is verified, the equivalent asset is then either unlocked or minted on the destination chain. Throughout this procedure, smart contracts play a pivotal role in ensuring the integrity and security of the transfer.
+
+---
+
+## The Evolution of Blockchain Layers and the Imperative of Cross-Chain Bridges
+
+The blockchain landscape has witnessed rapid evolution and diversification, especially with the development and proliferation of Layer 1 (L1) and Layer 2 (L2) solutions. As these layers offer unique benefits and face distinct challenges, the role of cross-chain bridges in connecting them becomes even more significant. Let's delve deeper into this progression and understand its implications.
+
+**Challenges with L1 Solutions: A Case of Ethereum**
+
+While Ethereum stands as a pioneering force in the blockchain sphere, it's not without its limitations. Ethereum's L1 can process about 15 transactions per second (TPS). This might sound adequate at first, but in periods of heightened activity, this capacity is quickly surpassed. The outcome? A congested network with skyrocketing transaction fees. For many users, especially those not willing or able to pay high fees, Ethereum's L1 becomes a less viable option. The decentralized promise of blockchain technology falters if only a subset of users can afford to participate.
+
+**L2 Solutions: Off-Chain Scalability**
+
+To address the above challenges, the web3 ecosystem pivoted towards L2 solutions. These are essentially systems built on top of existing L1 blockchains (like Ethereum) that process transactions off the main chain. By moving the bulk of transactions off the primary blockchain, L2 solutions significantly boost transaction speeds and reduce associated fees. This makes the entire ecosystem more scalable and user-friendly.
+
+**The Proliferation of Chains and the Emergence of Bridges**
+
+With the surge in L1 and L2 solutions, the blockchain universe started to resemble a vast archipelago, with each island (or blockchain) offering unique functionalities and assets. However, for these islands to share their treasures and truly unlock their combined potential, there was a need for robust bridges.
+
+Cross-chain bridges emerged as the answer. They became the essential infrastructure that allowed for assets, data, and value to flow freely between different blockchains. As more blockchains sprouted, the sophistication and capabilities of these bridges also evolved, making them indispensable tools for ensuring blockchain interoperability.
+
+The journey of cross chain bridges has been iterative, building upon past challenges and innovations:
+
+1. **Simple Swaps**: The initial bridges were rudimentary, allowing simple token swaps between chains. They acted as custodians, holding onto assets in one chain and issuing equivalent assets on another.
+2. **Smart Contract Integrations**: As the technology matured, bridges began integrating with smart contracts. This allowed not just the transfer of assets but also the triggering of actions on a separate chain.
+3. **Decentralized and Trustless Operations**: Early bridges often required trust in intermediaries. The new generation bridges eliminated this need, ensuring that users don't have to rely on third-party trust.
+4. **Optimization for Speed and Cost**: As user adoption grew, the demand for faster and cheaper operations increased. Hence, newer bridges use mechanisms like zero-knowledge proofs and sidechains to expedite processes and reduce costs.
+5. **Universal Bridges**: The future lies in bridges that aren't just limited to two chains but can connect multiple chains, acting as hubs in the vast blockchain ecosystem.
+
+---
+
+## The Genesis of Blockchain Bridges: Understanding Wrapped Asset Bridges
+
+At the heart of wrapped asset bridges lies a straightforward concept: you don't physically move an asset from one blockchain to another. Instead, the asset is represented on the new blockchain in the form of a 'wrapped' token. But what does 'wrapped' really mean?
+
+![mint-and-burn](/img/bridges-evolution/mint-and-burn.png)
+
+Imagine you have a Bitcoin (BTC). You want to use this Bitcoin on another blockchain, say Ethereum, which doesn’t inherently support BTC. Enter wrapped asset bridges. You'd deposit your BTC into a specific protocol on the Bitcoin blockchain. This BTC now acts as collateral. In response, an equivalent amount of wrapped Bitcoin (wBTC) is minted on the Ethereum blockchain. This wBTC is essentially a token on Ethereum that represents your original BTC. The beauty of this system? The value of wBTC is pegged 1:1 with BTC, ensuring that the wrapped asset mirrors the value of the original one.
+
+**An Illustrative Example**
+
+Consider you wish to engage with a decentralized application on Ethereum, but all you own is BTC. With wrapped asset bridges, you'd deposit your BTC on its native chain. This deposited BTC acts as collateral. Simultaneously, wBTC, an Ethereum-compatible token representing your BTC, gets minted on the Ethereum chain. Now, you can seamlessly use this wBTC within the Ethereum ecosystem, while your original BTC remains securely locked.
+
+---
+
+## Exploring the Types of Blockchain Bridges
+
+The decentralized universe has expanded immensely, and as a result, blockchain bridges have become instrumental in connecting diverse ecosystems. As the need for interoperability grows, it's crucial to understand the different types of bridges available and how they operate. Broadly, blockchain bridges can be categorized into trust-based and trustless. Let's dive deep into the nuances of these types.
+
+**1. Trust-Based Bridges (Custodial Bridges)**
+
+Trust-based bridges, often referred to as custodial bridges, follow a centralized operational model. Here's what you need to know:
+
+- **Centralized Operation**: A central entity or consortium manages these bridges. They play a pivotal role in validating and executing transactions between chains.
+- **Speed and Efficiency**: Owing to their centralized nature, trust-based bridges tend to be quicker, making them an attractive option for large-scale cryptocurrency transfers.
+- **Security Concerns**: The centralization aspect means that users place their trust in the central entity to act in good faith. While these entities are motivated to maintain a fluid transaction flow, the centralized model is potentially more susceptible to fraud and hacks.
+
+**2. Trustless Bridges**
+
+Trustless bridges are the decentralized counterpart to trust-based bridges, ensuring maximum security and flexibility. Here's their breakdown:
+
+- **Decentralized and Automated**: Trustless bridges leverage smart contracts for automation, eliminating the need for intermediaries. This approach resonates with the ethos of decentralization that many in the crypto community uphold.
+- **Enhanced Security**: Transactions undergo validation across multiple networks. This distributed consensus mechanism makes it challenging for malicious actors to manipulate or compromise the system.
+- **Flexibility**: Users gain the liberty to move their cryptocurrencies between chains with minimal restrictions, fostering a truly interoperable environment.
+
+---
+
+## The Evolution of Token Bridging: From Wrapped Assets to Sophisticated Aggregators
+
+Token bridging emerged as a solution to the inherent lack of interoperability between different blockchain networks. As blockchain ecosystems proliferated, the need for mechanisms to transfer tokens and data between these distinct networks became apparent. Token bridging serves to break down the barriers within single-chain ecosystems, thereby promoting greater interoperability among various blockchain networks. The initial solutions were rudimentary, focusing primarily on transferring assets between two chains. However, as the DeFi space expanded and the limitations of Layer 1 networks like Ethereum became apparent, the evolution of more sophisticated bridging mechanisms was propelled. Let’s have a look at them:
+
+**1. Wrapped Assets**
+
+- **Mechanism**: These are reminiscent of the early trust-based bridges where native tokens are deposited as collateral on a source chain, leading to the minting of wrapped versions on the destination chain.
+- **Limitation**: A notable constraint is its sole support for bridging native tokens between two distinct chains.
+- **Example**: wBTC.
+
+**2. Native Bridges**
+
+- **Mechanism**: Catering primarily to two chains, these bridges facilitate basic functions like transferring funds between L1 chains or between an L1 and its corresponding L2.
+- **Specificity**: Most L1 blockchains employ a distinct direct bridge to link networks. Some are custodied by dedicated foundations or entities.
+- **Examples**: Avalanche bridge, Polygon PoS bridge, Optimism gateway.
+
+**3. Burn and Mint**
+
+- **Mechanism**: This approach involves burning native tokens on the source chain and then minting an equivalent amount, either wrapped or native, on the destination chain. Reverting the process (bridging back) typically involves the opposite: burning the wrapped asset and minting the original asset.
+- **Versatility**: While some tokens, like USDC, employ direct burning and minting without wrapped intermediaries, others use the wrapped mechanism.
+- **Examples**: USDC, hop, across.
+
+**4. Liquidity Pools + Messaging**
+
+- **Mechanism**: Building on the introduction of data bridges, this method facilitates bridging any token to any other token by maintaining a singular liquidity pool. The attestation of deposits is managed through data bridges, while liquidity pools handle token deposits, making them available for release on the destination chain.
+- **Examples**: Stargate, Magpie.
+
+**5. Aggregators for Any Token to Any Token**
+
+- **Mechanism**: With varying times and returns associated with different bridging solutions, aggregators emerged. These platforms provide users with an array of bridging options for transferring from tokenA on chainA to tokenB. They achieve this by integrating decentralized exchanges in tandem with bridges.
+- **Example**: Socket, LiFi.
+
+---
+
+## The Hacker's Prize: Why Bridges Became Hot Targets
+
+Blockchain bridges, in particular, have emerged as lucrative targets for hackers due to their pivotal role in enabling interoperability between different blockchains.
+
+**Increasing Volume and Value**: The surge in bridging transactions has seen a corresponding growth in the Total Value Locked (TVL) across all bridges. This not only signifies the industry's success but also acts as a magnet for hackers.
+
+The risks involved in this sector were highlighted in 2022 when a staggering $2 billion in crypto assets were drained by hackers, according to the Rekt database. The Ronin bridge heist, which saw a loss of $540 million, stood as a stark example of the financial devastation that could ensue.
+
+Blockchain bridge hacks have persistently plagued the crypto industry, orchestrated through various tactics ranging from social engineering to exploiting code vulnerabilities, thereby accessing users' funds. These bridges, crucial for our multi-chain crypto ecosystem, have proven to be vulnerable to such nefarious exploits.
+
+**Costly Exploits of 2023**:
+
+- **Multichain Hack**: On July 6, 2023, the Multichain bridge saw unauthorized withdrawals leading to losses of over $125 million, marking it as one of the substantial crypto heists of the year.
+- **Binance Heist**: Binance, the world's largest cryptocurrency exchange, faced a significant blockchain bridge hack, with losses amounting to $100 million.
+
+The inherent vulnerability of blockchain bridges lies in their total dependency on the security protocols of the chains they connect. Any breach within one of the bridged chains jeopardizes the entire bridge's security. This scenario has been a persistent challenge, leading to significant financial repercussions.
+
+---
+
+## **Introduction to Messaging Bridges**
+
+Transferring tokens between blockchains was just the beginning. The future is in seamless data and application interoperability.
+
+![message](/img/bridges-evolution/message.png)
+
+- **Cross-Chain Communication**:
+    - The essence of blockchain bridges lies in their ability to enable an exchange of information, cryptocurrencies, or NFTs from one blockchain network to another, mirroring the role of financial institutions in the fiat currency realm[1](https://www.techtarget.com/whatis/feature/The-best-cross-chain-bridges).
+    - As the demand for Web 3.0 technologies escalates, the requirement for seamless interoperability among varied blockchain ecosystems intensifies, establishing blockchain bridges as indispensable tools[2](https://www.techtarget.com/whatis/feature/The-best-cross-chain-bridges#:~:text=6%20best%20cross,the%20need%20to%20enable%20interoperability).
+- **Fostering Application Development**:
+    - The rapid evolution towards a multi-chain future underscores the pivotal role of blockchain bridges, as they dismantle the silos that would otherwise impede the fluid exchange of messages native to individual networks[3](https://www.okx.com/learn/blockchain-bridges-explained-how-crosschain-messaging-protocols-work#:~:text=Updated%20Jun%2001%2C%202023%2013,native%20to%20a%20particular%20network).
+    - The recent traction gained by blockchain technology showcases a slew of use cases, simplified access points, and an impetus for businesses to integrate blockchain solutions, thereby expanding the horizon of practical applications like smart contracts and dApps in 2023[4](https://www.grantthornton.com/insights/articles/advisory/2022/2023-outlook-for-blockchain-and-digital-assets-in-business#:~:text=As%20blockchain%20technology%20and%20its,dApps%20and%20beyond%20in%202023).
+- **Enhancing Developer Experience**:
+    - Let's take the world of decentralized finance (DeFi) as an example. Numerous DeFi projects might be spread across various blockchains, with each offering a unique value proposition. Cross-chain mechanisms enable these to integrate seamlessly. Then there's the realm of NFTs—envision swapping an NFT minted on one blockchain with an NFT from another, all without the convoluted steps of converting through a common cryptocurrency. This seamless operation epitomizes the potential of advanced cross-chain communication.
+
+---
+
+## Future of cross chain bridges - ZK bridges
+
+The evolution of cross-chain bridges has been driven by the need to solve the twin challenges of scalability and security that they currently face. A significant portion of these challenges stems from the trust assumptions and central entities often required to maintain these bridges. For instance, some bridges use off-chain actors or validators which introduce new trust assumptions beyond those inherent to the underlying blockchains, and this can result in trust-based custodial setups. 
+
+![zk](/img/bridges-evolution/zk.png)
+
+Since past two years we saw a substantial increase in bridge-related security incidents, with attacks on cross-chain bridges accounting for a significant portion of the total funds stolen in the crypto space, emphasizing the urgent need for enhanced security measures. The poor performance and scalability issues further compound these challenges, making it essential to reimagine the design of cross-chain bridges.
+
+One of the promising solutions in this regard is the incorporation of light clients. Light clients are streamlined software components that interact with full nodes on a blockchain, enabling a bridge to ascertain the state of a source blockchain while operating on a target blockchain. By housing a light client of the source chain on the target chain, the latter can effectively "understand" and validate the former's consensus within its execution environment. This setup minimizes trust assumptions, thereby enhancing both security and efficiency. Light clients, by verifying cross-chain messages in a mathematical manner, negate the need for federations to verify events on another chain, thereby promoting a more trustless and efficient bridge operation.
+
+Zero-Knowledge (ZK) bridges represent another horizon in the journey toward secure and scalable cross-chain interoperability. Utilizing zk-SNARKs (Zero-Knowledge Succinct Non-Interactive Arguments of Knowledge), ZK bridges can prove the correctness of state transitions on remote blockchains, thereby eliminating external trust assumptions. This trustless and secure approach, represented by implementations like zkBridge and zkRouter, aims to significantly enhance the security and efficiency of cross-chain operations. By leveraging zero-knowledge proofs, these bridges can provide a more robust and efficient framework for cross-chain interactions, addressing both the security and performance challenges that have plagued traditional bridge designs.
+
+---
+
+## Conclusion
+
+The growth of cross-chain bridges shows a strong move towards making different blockchains work together, leading to a more connected multi-chain ecosystem. From simple asset bridges to more advanced protocols, the journey has been remarkable, with the assets locked in these bridges jumping from $25 billion to over $200 billion within a year. New innovations like zkRouter are bringing in more secure and efficient ways to bridge different chains. As these bridges evolve, they're becoming crucial for not just transferring assets or data, but for building a more open and unified blockchain network. The ongoing improvements are addressing key challenges like scalability and security, paving the way for easier interactions across different blockchain networks.
