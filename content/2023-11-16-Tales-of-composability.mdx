@@ -14,7 +14,7 @@ At its core, composability involves the ability to seamlessly interact with vari
 
 **Why Does it matter?** The idea of having a composable developer environment is build Lego-like developer tools and infra that can built upon for a wide range of applications. But it also is important to allow developers the flexibility to choose whether what they build should be open for anyone to interact with like some DAO Governance contracts or being able to withdraw funds from treasury might be better of whitelisted for specific wallets which is where you get the idea of `msg.sender and. let context = accounts[0]` in case of solana.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c1e14b19-8da7-471d-914f-52e5f1f1a6fc/a0cb5684-48b3-463f-883b-fedb9ada2c3f/Untitled.png)
+![Untitled](static/img/tales of composability/cpi_meme.png)
 
 ## What is Interoperability then?
 
@@ -22,7 +22,7 @@ Defining interoperability in one word would be compatibility between programs an
 
 	  The more you want it to be aligned with evm and compatible more will the zk circuits and proof generation be bigger, The more custom zk Virtual machine faster it is but adds a lot of developer friction. So everyone is weighing on which side they going, Vitalik categorised them on a scale in his blogpost. 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c1e14b19-8da7-471d-914f-52e5f1f1a6fc/1fa19ded-dfa3-4cb1-900f-c4e0ad4ecd19/Untitled.png)
+![Untitled](static/img/tales of composability/vitalik_zkevm.png)
 
 While composability is about small pieces working together, Interoperability is about producing an environment where the program works without marginal changes and has a deterministic outcome chain 
 
@@ -41,7 +41,7 @@ But they also built Portals, a protocol on top of AAVE that allows positions and
 
 **Uniswap** is deployed on over 10 chains with a total TVL of 4 Billion of which around 500 Million lies on Polygon and Arbitrum but produces more than 25% of the protocol fee. LPs who deposit their assets on L1 for yield even though constitiute a big part of the volume only reap less percentage of yield while paying extra gas. 
 
-![Screenshot 2023-10-31 at 5.21.41 PM.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/c1e14b19-8da7-471d-914f-52e5f1f1a6fc/d6c7050a-7681-4928-9096-9a1cdca582e1/Screenshot_2023-10-31_at_5.21.41_PM.png)
+![Untitled](static/img/tales of composability/Screenshot 2023-10-31 at 5.21.41 PM.png)
 
 - I have huge respect for AAVE and what the team has done but I dont really understand how deploying the same dapp on diff chains is adding more value when a big part of the users end up bridging assets to actually use the same thing on a different chain.
     
@@ -54,12 +54,12 @@ A clever design strategy adopted by Uniswap  involved leveraging Ethereum as the
 > On the destination chain, MultiBridgeReceiver receives messages from every bridge receiver adapter. Each receiver adapter gets encoded message data from its bridge contracts, and then decode the message and call `receiveMessage()` of `MultiBrideReceiver`.
 > 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c1e14b19-8da7-471d-914f-52e5f1f1a6fc/c93ef349-507a-4407-89b5-20a521245adb/Untitled.png)
+![Untitled](static/img/tales of composability/uniswap_governance.png)
 
 Uniswap went a step further by publishing a [comprehensive report](https://gov.uniswap.org/t/cross-chain-bridge-assessment-process/20148) in which they categorised various bridges based on their suitability and security for Uniswap governance integration. This is great in a way that allows for the aggregation of power on ethereum . 
 Drawbacks →
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c1e14b19-8da7-471d-914f-52e5f1f1a6fc/51757156-3b6f-49f8-9503-9239048e5d9e/Untitled.png)
+![Untitled](static/img/tales of composability/sheet.png)
 
 - If the holders hold most of their assets on a rollup and have staked their governance token in some liquidity pool they wont be able to take part in governance without occurring some more overhead.
 - Contract Mutability depends on the message passed by bridges and if the bridge is compromised the contracts state on the spokes could have exposure
@@ -74,12 +74,12 @@ Ethereum stands out as the central hub of DeFi, primarily due to its liquidity. 
 On the other hand, Solana block time of just 400 milliseconds, and it has native oracles like Pythnet. However, a notable setback occurred with the FTX incident, which significantly reduced liquidity on the network. 
 **A cross chain lending protocol:** Users can park collateral on any evm chain and get a loan on non evm chain and vice versa using a single liquidity layer like wormhole with single clicks. Where a  separate rollup that maintains all the state of the program and registry for address mapping and posts state proofs on the main chain and uses cross chain messaging for liquidation and uses native pyth price feeds in the messages for accurate prices. 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c1e14b19-8da7-471d-914f-52e5f1f1a6fc/949af9ae-ba17-4b6e-a661-f5d1ffc9c22b/Untitled.png)
+![Untitled](static/img/tales of composability/state_manager.png)
 
 A Perpetual Dex that takes Collateral on Arbitrum but also takes a position on Aptos which ensures that liquidations happen on accurate prices.
 As the security profile of assets changes when they move from one chain to another, Leveraging cross chain messaging rather than bridging allows dapps to offer better security and scalability at the same time. 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/c1e14b19-8da7-471d-914f-52e5f1f1a6fc/0e038c3b-f19e-4382-9b5b-5710f4e12433/Untitled.png)
+![Untitled](static/img/tales of composability/astro.png)
 
 ## Interoperability of assets
 
