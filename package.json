@@ -16,6 +16,7 @@
     "write-heading-ids": "docusaurus write-heading-ids"
   },
   "dependencies": {
+    "@agentofuser/remark-oembed": "^1.0.4",
     "@docusaurus/core": "2.0.0-beta.6",
     "@docusaurus/plugin-content-blog": "2.0.0-beta.6",
     "@docusaurus/plugin-content-docs": "2.0.0-beta.6",
@@ -47,6 +48,7 @@
     "react-dom": "^17.0.1",
     "rehype-katex": "4",
     "remark-math": "3",
+    "remark-oembed": "^1.2.2",
     "sass": "1.39.0",
     "url-loader": "^4.1.1"
   },
