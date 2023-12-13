@@ -1,0 +1,96 @@
+---
+slug: going-deep-into-poh-solana
+title: "Going deep into PoH"
+authors: [tejas]
+tags: [solana, poh, consensus]
+image: /img/poh-solana/Ppp1.jpg
+hide_table_of_contents: false
+---
+![](/img/poh-solana/Ppp1.jpg)
+First of all, Proof-of-History is a way to achieve higher TPS, it's not a consensus mechanism to validate blocks. Solana is the talk of the town these days with a slew of stories, hence throwing some light on Solana Proof of History and how it gets such great throughput can be helpful. Solana still uses Proof-of-stake for achieving the digital consensus while Proof-of-history is used to achieve higher TPS. Moreover, Solana has 8 major innovations at different levels of the protocol; it's prudent to write about each innovation in a separate post starting with the Proof of History Innovation here.
+
+<!--truncate-->
+
+- Solana was founded in 2017 by Anatoly Yakovenko, a former engineer at Qualcomm and Dropbox. Anatoly and his team, with deep expertise in embedded systems and compression algorithms, considered the computing power and high-throughput requirements while building Solana instead of using components from the existing blockchains like Ethereum and Bitcoin. Ethereum and Bitcoin are fundamentally slow blockchains due to the high latency of the network. It was an important objective for the Solana team to tackle these problems innovatively. We will understand this in detail below.
+- *Just like Satoshi Nakamoto found a potential solution (a workaround) for the famous technical trilemma of **CAP** theorem in distributed systems* [Consistency (**C**),  Availability (**A**), Partition tolerance (**P**)] by introducing the “Proof of Work” for mining the blocks for achieving a common digital consensus, blockchains today are faced by a **new age trilemma** - **scalability, low-cost and decentralization (security)**. Solana seems to have found a solution for this.
+- **Considering this trilemma** - scalability, security and decentralization.
+- Ethereum blockchain isn’t scalable in its original form with 10-20 TPS (transactions per second) with higher gas fees, but it is secure and decentralized enough. The ethereum network has more than 200k+ nodes across the planet. Average gas fees chart given below
+- Binance Smart Chain - is scalable, low-cost but isn’t secure enough due to a high degree of centralization with only 43 “chosen” validators. - <https://bscscan.com/validators>
+- Solana potentially Solves all three issues - it's scalable with 65,000 TPS under normal conditions. Current TPS on mainnet is generally >2500 and scales a lot more depending on the requirement. Currently the extent of decentralization for Solana is only a little decentralized when compared to Ethereum with 1000+ validators. However the number is expected to go up very fast. Transaction cost is extremely low ($0.00001 network fee)
+
+![](/img/poh-solana/Aspose.Words.8dd352e7-5874-456c-8997-4783cd3320cf.001.jpeg)
+
+<https://messari.io/asset/ethereum/chart/txn-fee-avg>
+
+![](/img/poh-solana/Aspose.Words.8dd352e7-5874-456c-8997-4783cd3320cf.002.jpeg)
+
+<https://solanabeach.io/validators>
+
+**Before digging deeper into the Proof of History - one must understand Fundamentals of Computer Networking and Data Transmission over the Internet**
+
+- The internet makes blockchains possible. It is the base communication layer that allows people to run nodes and achieve worldwide “decentralization” required to tackle the incumbent central powers. Backbone of the internet is formed by the wired and wireless communication channels. For the Gigabit Ethernet network, the theoretical maximum bandwidth is defined by a node being able to send **1 Billion Bits** per second, which is equivalent to **125 000 000** bytes per second (1000000000 / 8). since 1 **Byte** = **8 Bits**.
+- For real-world networks, multiple layers of overhead, it's not possible to send 125000000 bytes/second. In reality, this data is first divided into distinct “frames”. Depending on the size of these frames, the maximum number of bytes/second transmission can be calculated. The maximum frame size for Ethernet has been **1518 byte** for the last 25 years or more.
+## Ethernet Overheads
+1. All frames must have a minimum length of 64 bytes which includes Destination MAC (6 bytes), Source MAC  6 bytes), Ether Protocol Type (2 bytes), Payload (minimum 46 bytes) and CRC (4 bytes). Payloads can be extended upto 1500 bytes.
+1. In addition to this mentioned frame size. All frames must have an 8 bytes preamble, a 12byte inter-frame gap.
+1. So, 12 empty bytes of Interframe Gap + 8 bytes of preamble + (minimum 64 bytes to maximum 1518 bytes of frame data) = 84 bytes to 1538 bytes can be sent per transaction.
+
+**It means that, for each maximum payload of 1500 bytes, we lose 38 bytes.**
+
+![](/img/poh-solana/Aspose.Words.8dd352e7-5874-456c-8997-4783cd3320cf.003.jpeg)
+
+*Source : Wikipedia*
+
+## TCP/IP overheads
+- Just behind the Ethernet header there would most likely be **IP header** and **TCP header** 20 bytes long each (if using ordinary IPv4) i.e. 40 bytes total, The amount of data transferred in each TCP segment is called the **Maximum Segment Size** “(MSS) and is typically 1460 bytes.
+- So the Ethernet header, checksum, interframe gap, preamble and TCP/IP headers will together add 78 bytes more. For **each 1460 bytes of data** sent we have a minimum of **78 extra bytes** handling the transfer at different layers which is a clear overhead.
+- For an ideal 125000000 bytes/second on Gigabit Ethernet, if each frame contains the maximum payload of 1538 bytes
+
+  Number of frames/second = 125000000 / 1538 = 81274
+
+- But in reality, a frame could only carry 1460 bytes of data over a TCP/IP segment, This means that we could transfer **118 660 598 bytes per second** (81274 frames x 1460 bytes data), i.e. around 118 megabytes per second. This means that when using an **efficiency of around 94%** (118660598 / 125000000) with the 6% of overhead. There exist additional techniques called ‘Jumbo Frames’ to increase this throughput upto 99%
+- Real bottlenecks and additional delays are added by the disk/storage performance issues. For example, BSC runs at about 200 TPS and already requires NVME bare-metal to sync the full nodes.
+
+**Considering the size of the transactions on Centralized database systems on the Standard Gigabit Ethernet. How blockchains can get inspired by the centralized databases**
+
+- Ethernet LAN was the first widespread distributed system that was invented in the 1970s and became a branch of computer science studies in the early 1980s. There is a solid 4 decades plus of incremental research around the distributed systems which can be used to improve the blockchain throughput similar to the centralized database systems. Satishi Nakamoto neither solved the Byzantine Generals Problem nor was he the first one to introduce peer-to-peer network to achieve decentralization. Nakamoto was smart enough to pick up the different pieces of research on cryptography, state machines, peer-to-peer networks, digital consensus and ecash systems spread across the decades and put them together to use to invent an entirely new system.
+
+![](/img/poh-solana/Aspose.Words.8dd352e7-5874-456c-8997-4783cd3320cf.004.jpeg)
+
+- There is a necessity to emphasize on certain points mentioned above regarding the historical research in distributed systems.
+    1. A node is an individual player in a distributed system with its own memory and a processor capable of sending and receiving messages to and from each other. Nodes can be honest, faulty, or malicious and can exhibit irrational behavior purposely or when gone rogue. In 1982, a thought experiment called Byzantine Generals Problem was proposed by a Turing award-winning American computer scientist Dr. Leslie Lamport in a research paper to an analogy to distributed systems. In this thought experiment, a group of army generals who lead different parts of the Byzantine Empire army are planning to attack or withdraw from a city. The only way of communicating among them is via a messenger. They must agree to strike at the same time in order to win. They may fail to win if one or more generals are traitors who could send a misleading message. Hence, there is a requirement to develop a viable mechanism that allows for agreement and handles traitors misleading this strategic decision. This thought experiment is similar to
+
+- After doing the calculations of the optimized payload size and parity bits, it is possible for a centralized database to process **710,000 transactions per second** on a standard gigabit network if the transactions are, on average, **no more than 176 bytes**. A centralized database can also replicate itself and maintain high availability without significantly compromising that transaction rate using the distributed system technique known as Optimistic Concurrency Control.
+- Large databases used by corporations or companies, despite being distributed over a network via a Server-Client architecture, are ‘centralized’ in nature due to the fact that the control entirely lies within the hands of such corporations or companies. Whereas Blockchains are entirely decentralized where there is no client or server. Each node carries the same importance and is entirely independent with respect to the other node.
+- The most important point to consider here is about “timing”. All transactions happening on any blockchain are timestamped, It is possible for the block miners or validators to put a fake timestamp on transactions. Whereas, fake timestamping isn't generally possible within the  ‘centralized’ databases. Centralization comes from the fact that the nodes in a centralized network have to rely on a ‘central’ authority/machine for setting their own clock. Whereas, nodes on blockchains are entirely independent of each other and there is no central authority to rely upon for the clock settings.
+- Blockchains are entirely distributed in nature, Solana team wants to demonstrate that theoretical limits of Centralized databases can be applied to blockchains. Hence they developed the Proof of History mechanism as one of the ways of timestamping transactions when nodes cannot rely upon one-another. Once nodes can rely upon time, suddenly ~40 years of distributed systems research becomes applicable to blockchain.
+
+## Now let's dig into actual Proof of History, you’ll love it
+
+- As mentioned above, all transactions happening on a blockchain are timestamped, It is possible that the block miners or validators could put a fake timestamp on transactions for their own benefits or as a part of an attack vector. Hence for each transaction to remain legit and acceptable within the network, the transaction-message must be signed and timestamped by each node in the blockchain network. In this way, each transaction message spends a long time in the network getting propagated throughout the network and gets timestamped, resulting in slowing down the network while consuming the high internet bandwidth.
+- Solana solves the timestamping issue by implementing the Proof-of-History (PoH) mechanism, which is a special cryptographic hash function that assigns a unique timestamp and a count to each transaction. To simply say, with this timestamp and the counter, there is no need for transaction messages to be timestamped again and again throughout the network, it results in an extremely high throughput that saves enormous amounts of bandwidth and allows Solana to reach 65k TPS limit. PoH allows automatic ordering of transactions and sub-second on-chain settlements become real. Every 400ms, validators vote on inclusion of transactions in slots and no further timestamping is needed within the network. Proof of History is not a consensus mechanism, but it is used to improve the overall performance of
+
+  Solana's Proof of Stake consensus. As mentioned above, Proof of History is not a consensus mechanism. Digital Consensus for adding new blocks in the blockchain is achieved by a fair Proof of Stake voting mechanism. In order to pass, at least two thirds of all nodes have to agree with each other. TowerBFT is an algorithm used by Solana for achieving consensus on adding such new blocks to the blockchain.
+
+- Solana has implemented **Proof of History** for achieving faster consensus among the nodes (which can lead to a high throughput of 65000 TPS), however Proof of History doesn’t prevent the bad actors in the system. Hence, to secure the network, Solana has **also** implemented the Proof of Stake (validators purchase and stake $SOL tokens) to provide assurance to network participants that bad actors would face penalties by having their staked tokens “slashed” or partly confiscated if they’re found to be voting against PoH.
+    1. In order to understand the Proof of History, it's important to understand how the Bitcoin network secures itself. There exists a parameter called “**nLockTime**” in Bitcoin protocol which can be attached to a transaction. It means that a transaction cannot be verified until the specified locked time (or the block height)  has passed. Consider an example, suppose Alice initiates a transaction to transfer 1 Bitcoin to Bob for a given wallet address. Alice adds **nLockTime** parameter equivalent to 86400 seconds (1day) while initiating the transaction. For the transaction to be final and irreversible, the transaction needs to be included in a block. The nLockTime parameter is used to guarantee that the given transaction cannot be mined/verified prior to the specified unix timestamp (or a certain **block height**). Bitcoin nodes use block height instead of a timestamp because they don't rely upon the network. Some exchange platforms and wallet apps use **nLockTime** while letting users withdraw the funds. It's a cryptographically secure way to guarantee that a certain time has passed (delay) before the transaction is verified. Hence nLockTime is considered as a “Verifiable Delay Function” (VDF) in cryptography. Using such a mechanism clearly leads to a lower throughput.
+    1. The whole purpose of distributed processing is to allow different processes to operate independently and asynchronously. However, if a way could be found for the processes to be synchronized and timestamps can be generated such that all nodes can rely upon time without any central authority, then transaction messages on Solana wouldn’t need to spend time getting timestamped throughout the network. Well, Solana team found that way. Solana uses the **SHA256 hash** chain algorithm as a Verifiable Delay Function, which is far more granular than Bitcoin’s, to checkpoint the ledger and coordinate consensus. This way processes spend only a small fraction of their time executing the synchronization timestamping kernel; the rest of the time, they can operate independently.
+    1. Nodes of existing blockchains are essentially state machine replications. Transactions have to be put into deterministic orders for the asynchronous
+
+   nodes to properly replicate. PoH requires the network to be synchronized for a higher throughput.
+
+- Hence the Solana architecture describes a theoretical upper bound of 710 thousand TPS on a symmetric commercial grade standard gigabit network (28.4 million tps on 40 gigabit). Furthermore, the architecture supports safe, concurrent execution of programs authored in general purpose programming languages such as C or Rust.
+
+**In March 2018, Solana had reported processing 250 000 transactions per second on a single-node testnet with a peak at 400 000 TPS when a very high-end CPU/GPU & Memory hardware is thrown at Solana. Full news below. A single node is no bottle-neck.**
+
+<https://medium.com/solana-labs/solana-newsletter-2-677a9b8c7d11>
+
+Other Innovations of Solana listed below, shall write about those in detail one at a time. Stay tuned!
+
+- **Tower BFT**
+- **Turbine**
+- **Gulf Stream**
+- **Sealevel**
+- **Pipelining**
+- **Cloudbreak**
+- **Replicators/Archivers**
