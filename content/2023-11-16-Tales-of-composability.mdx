@@ -1,0 +1,119 @@
+---
+slug: tales-of-composability
+title: Tales of Composability
+authors: [madhav]
+tags: [composability, bridges, cross-chain]
+hide_table_of_contents: false
+---
+You can get away through any protocol conversation in crypto by saying "But its not composable bro" like you did when you just added zk to the bio or name of your project at the start of 2023 but like everything interesting but overhyped Composability is just known and there is a chasm of difference between knowing and understanding something.
+<!--truncate-->
+
+## Defining Composability
+
+At its core, composability involves the ability to seamlessly interact with various programs and systems within an environment, eliminating the need to start from scratch for every component. A prime illustration of composability is the practice of cross-program invocations, enabling the calling of functions or importing actions from other smart contracts. This approach spares you the effort of building everything from the ground up and reinventing the wheel. It's a key factor behind the efficiency of the crypto space. For instance, it's the reason why every NFT creator doesn't have to define token standards from scratch, and why you can place orders on openbook through any DEX because their functions are public and can be accessed by agents.
+
+**Why Does it matter?** The idea of having a composable developer environment is build Lego-like developer tools and infra that can built upon for a wide range of applications. But it also is important to allow developers the flexibility to choose whether what they build should be open for anyone to interact with like some DAO Governance contracts or being able to withdraw funds from treasury might be better of whitelisted for specific wallets which is where you get the idea of `msg.sender and. let context = accounts[0]` in case of solana.
+
+![Untitled](/img/tales-of-composability/cpi_meme.png)
+
+## What is Interoperability then?
+
+Defining interoperability in one word would be compatibility between programs and the state, Smart contracts need to have access to the same state so that it produces a predictable outcome like a general Turing machine. 	  To get a repeatable output from a program we need to ensure that there are no changes in the data the program has access to and the environment its run which in case of blockchains is the execution system aka virtual machine like CosmoWASM or EVM. Blockchain interoperability in the EVM ecosystem is focused on a big part on the opcode and bytecode compatibility as many teams are building ZkEvms. Every zkevm has its own level of compatibility and there is a caveat. 
+
+	  The more you want it to be aligned with evm and compatible more will the zk circuits and proof generation be bigger, The more custom zk Virtual machine faster it is but adds a lot of developer friction. So everyone is weighing on which side they going, Vitalik categorised them on a scale in his blogpost. 
+
+![Untitled](/img/tales-of-composability/vitalik_zkevm.png)
+
+While composability is about small pieces working together, Interoperability is about producing an environment where the program works without marginal changes and has a deterministic outcome chain 
+
+## Composability: Myth or truth?
+
+As of right now, A "Multichain Dapp" is nothing but taking the evm code and deploying the dapp on every single evm clone and L2 has been the norm so far when folks talk about their dapp code being Interoperable, then degens who were earning yield on the mainnet bridged the same assets on an L2 and kept doing what they were doing to pay less fee on their eth interactions. This approach to some level has worked well for a big part of the ecosystem but there are some blind spots everyone missed when they write a DAO governance proposal to take their DeFi app "Multichain". 
+
+**Separate Hub Model→
+AAVE** is deployed on 9 different protocols, with very little difference in architecture other a big chunk of them being rollups with just cheaper gas costa and off chain computation. 30% of the Total Value locked lies in different EVM forks and L2s while them having pretty much the same architecture and no big improvements other than cheaper blockspace. [Looking at one of the](https://vitalik.ca/images/zkevm/chart.png) [dao proposals](https://snapshot.org/#/aave.eth/proposal/0x8fd34012029bec536f779b7bf46813beb57f42705b24acaf239e42353ddf7b8c) for AAVE to deploy on zkEVM l2 and the biggest motivation is to capture the market early on while for a big part its the same group of people using both of the chains. 
+But they also built Portals, a protocol on top of AAVE that allows positions and tokens to be migrated across aave supported chains. This functionality is primarily utilized by bridging protocols, and there are no direct methods for end-users to leverage [Portals](https://docs.aave.com/developers/whats-new/portal) within the core protocol.
+
+> Aave protocol V3 allows ***approved bridges*** to burn *aTokens* on the source network while instantly minting them on the destination network. The underlying assets can then be supplied to Aave on the destination network, in a deferred manner, by passing it to the pool after it has been moved through a bridge.
+> 
+
+[Debridge X AAVE](https://governance.aave.com/t/arc-whitelist-debridge-for-portals-v3/8259) → This integration allowed folks to tap directly into the Portals V3 and access the liquidity for cross chain swaps without the need to introduce new liquidity vaults and additional security overhead. 
+
+**Uniswap** is deployed on over 10 chains with a total TVL of 4 Billion of which around 500 Million lies on Polygon and Arbitrum but produces more than 25% of the protocol fee. LPs who deposit their assets on L1 for yield even though constitiute a big part of the volume only reap less percentage of yield while paying extra gas. 
+
+![Untitled](static/img/tales-of-composability/Screenshot 2023-10-31 at 5.21.41 PM.png)
+
+- I have huge respect for AAVE and what the team has done but I dont really understand how deploying the same dapp on diff chains is adding more value when a big part of the users end up bridging assets to actually use the same thing on a different chain.
+    
+    
+
+**Hub and Spoke Model** **of Governance**→
+
+A clever design strategy adopted by Uniswap  involved leveraging Ethereum as their central voting hub while utilising cross-chain messaging for deployment and governance. Kinda like a Hub-spoke model, the cross chain messages validate and send cross chain contract execution logic. They use MMA model where Uniswap uses multiple bridges and relayers to send the result of votes onto another chain where a uniswap contract aggregates them all and they are voted on again for verification 
+
+> On the destination chain, MultiBridgeReceiver receives messages from every bridge receiver adapter. Each receiver adapter gets encoded message data from its bridge contracts, and then decode the message and call `receiveMessage()` of `MultiBrideReceiver`.
+> 
+
+![Untitled](/img/tales-of-composability/uniswap_governance.png)
+
+Uniswap went a step further by publishing a [comprehensive report](https://gov.uniswap.org/t/cross-chain-bridge-assessment-process/20148) in which they categorised various bridges based on their suitability and security for Uniswap governance integration. This is great in a way that allows for the aggregation of power on ethereum . 
+Drawbacks →
+
+![Untitled](/img/tales-of-composability/sheet.png)
+
+- If the holders hold most of their assets on a rollup and have staked their governance token in some liquidity pool they wont be able to take part in governance without occurring some more overhead.
+- Contract Mutability depends on the message passed by bridges and if the bridge is compromised the contracts state on the spokes could have exposure
+
+## Envisioning a different Multichain model
+
+To build a truly MultiChain dapp, why not use different chains to leverage their strengths? Rather than deploying same dapp on different chains what if we truly used the factor of cross chain composability and bridges we could host parts of the dapp on protocols that supports it the most and use cross chain messaging to tie it together. Lets take on example
+
+<iframe border="0" frameborder="0" height="350" width="550"
+ src="https://twitframe.com/show?url=https://twitter.com/0xJim/status/1597319705202946048"></iframe>
+
+Ethereum stands out as the central hub of DeFi, primarily due to its liquidity. However, it does come with certain limitations. Most DeFi protocols rely on Oracles to provide price feed updates. These price feeds are crucial for price discovery and determining how users swap, lend, and trade on DEXs. Unfortunately, Ethereum's price feeds can only update as fast as the blockchain's block time, which is approximately 12 seconds. Even then, they must navigate the typical transaction pipeline and face challenges related to Maximum Extractable Value (MEV) and the proposer builder separation. This complexity makes it challenging to ensure that prices are always accurate, and in the history of DeFi, stale prices have caused unnecessary liquidations.
+On the other hand, Solana block time of just 400 milliseconds, and it has native oracles like Pythnet. However, a notable setback occurred with the FTX incident, which significantly reduced liquidity on the network. 
+**A cross chain lending protocol:** Users can park collateral on any evm chain and get a loan on non evm chain and vice versa using a single liquidity layer like wormhole with single clicks. Where a  separate rollup that maintains all the state of the program and registry for address mapping and posts state proofs on the main chain and uses cross chain messaging for liquidation and uses native pyth price feeds in the messages for accurate prices. 
+
+![Untitled](/img/tales-of-composability/state_manager.png)
+
+A Perpetual Dex that takes Collateral on Arbitrum but also takes a position on Aptos which ensures that liquidations happen on accurate prices.
+As the security profile of assets changes when they move from one chain to another, Leveraging cross chain messaging rather than bridging allows dapps to offer better security and scalability at the same time. 
+
+![Untitled](/img/tales-of-composability/astro.png)
+
+## Interoperability of assets
+
+One of the most basic mechanism to bridge assets from one chain to another is lock and release which adds the requirement of liquidity pools on both sides but they introduce one big hurdle →
+The bridge needs to have liquidity pairs for every single token. Having more liquidity pools adds to the attack vectors and security considerations for every single bridge but this can be taken care of a unified pool where the assets are not swapped based on the xy=k equations where the assets swapped on the right side must maintain an equal value but based on on chain price feeds. 
+The price feeds are used to compare prices and then swapped with the use of unified pool as an AMM. 
+
+However, a significant challenge when it comes to cross-chain swaps is that, apart from the Ethereum Virtual Machine (EVM), each blockchain has its own unique token standard. In some cases, these token standards may not seamlessly translate from one chain to another. As a result, many bridges resort to minting their own assets on the receiving chain. These assets are often "wrapped" or take the form of derivatives that are backed 1:1 by the bridge's smart contracts. This approach renders them somewhat non-fungible with one another, as many bridges have their own variations of wrapped tokens. Consequently, users are required to take extra steps, such as wrapping or performing additional swaps, to obtain the native tokens.
+
+This is where Canonical Bridges emerge as game-changers in terms of user experience . Canonical bridges prioritize the bridging of native tokens without wrapping unless it becomes absolutely necessary. For instance, in cases where Bitcoin cannot support a native bridge due to the absence of smart contract capabilities, individuals can park their tokens through non-native bridges and use them to mint wrapped or threshold Bitcoin. This approach allows users to access and utilize these assets in the realm of DeFi with greater ease and efficiency. 
+
+## The Endgame
+
+Till now we have talked about smart contracts being able to call cross program functions to wrapping of assets but one of the true end games for cross chain interoperability is not just being able to deploy smart contracts flawlessly but having cross chain messaging standardisation. 
+At this point every bridge has a different mechanism to transmit messages and usually totally different message formats and relayers to do so which adds to the complexity that if the dapp developers want to switch from one bridge to another they have to totally overhaul their smart contracts and approach to messaging which is not the ideal state. 
+
+One of the examples of this IBC and cosmos, Cosmos has a basic set of defined rules which allows any chain to interact with each other in a pretty standardised way unlocking the best cross chain model but IBC approach is limited to cosmos at this point as all of the app specific chains follow the same tendermint consensus.  
+
+<iframe border="0" frameborder="0" height="500" width="550"
+ src="https://twitframe.com/show?url=https://twitter.com/auryn_macmillan/status/1389594385604653060"></iframe>
+
+Challenges in Establishing a Standardized Cross-Chain Messaging Format:
+
+1. **Consensus Difference**: While cross-chain messaging for EVM-to-EVM interactions is relatively straightforward due to shared token standards and cryptographic signatures, extending this to EVM-to-non-EVM chains poses a unique paradigm. Token standards often do not have direct equivalents on other chains.
+2. **Block Difference**: Each blockchain operates with varying confirmation times, making synchronization a challenge when implementing cross-chain messaging.
+3. **Proof Generation**: Facilitating state transitions and transaction signature validation across chains is a key objective for bridges. However, when dealing with chains of different architectures, this process involves complex security assumptions and considerations.
+
+## Conclusion
+
+Cross chain interoperability has been in talks for more than 2 years but everyday there keeps popping new designs and security structures because the incentives are super high for anyone who solves this problem but we can always be sure that it is going keep getting more exciting since new bridges like Circle’s cctp and Chainlinks own solutions are coming on mainnets.
+
+
+## References
+- [Types of Zkevms by Vitalik](https://vitalik.ca/general/2022/08/04/zkevm.html)
+- [DefiLlama](https://defillama.com/)
+- [Uniswap Governance](https://gov.uniswap.org/t/cross-chain-bridge-assessment-process/20148)
