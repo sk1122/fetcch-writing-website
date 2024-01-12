@@ -1,0 +1,54 @@
+---
+slug: incentivisation-scheme=for-fraud-validity-provers
+title: "Incentivization scheme for fraud/validity provers"
+authors: [satyam]
+tags: [prover, rollup]
+image: /img/incentivisations-of-provers/rollups.png
+hide_table_of_contents: false
+---
+
+tldr; most rollups don’t have a proving setup, those who have don’t have incentivizations figured out.
+
+![Incentivisations of provers](/img/incentivisations-of-provers/rollups.png)
+
+<!--truncate-->
+
+# Current scenario
+
+Many rollups have not implemented a fraud/validity proving system or do not have an incentivization mechanism set for them. Both of them are harmful to industry and we should focus trying to come up with a solution that incentivizes provers while keeping the protocol profitable.
+
+Optimism doesn’t have fraud-proof enabled yet. Canon is still in the development stages and we don’t have clear timelines around that. Arbitrum has interactive fraud proofs but it's only for whitelisted provers. Zk rollups also have a whitelist mechanism, where only allowed provers can generate Zk proofs for blocks.
+
+Whitelisting was a good solution when the system was not stable, now the ecosystem should grow and start enabling everyone to create proofs. To do this, we will need some incentivization mechanism setup in place to correctly reward provers that is sustainable and profitable over the long term.
+
+In this blog post, we will discuss some incentivization tactics that we could think of.
+
+# Methods of Incentivization
+
+## Collateral
+
+Block producer/sequencer can put up some collateral on a block that “This is correct” and will not be proved otherwise. If it's proved fraud in the following 7 days, the collateral will be unlocked and sent to the prover, otherwise, the collateral will be returned to the block producer.
+
+The amount of collateral that a block producer needs to put up is ambiguous because it depends on the L1 fees during proving and the effort that goes into proving a block fraud, as it may contain multiple state changes that are fraud, incrementally increasing the cost to prove.
+
+So, instead of putting up collateral on a per-block basis, it makes sense to put up collateral on a per-tx basis. This way, even if multiple transactions are fraud from a block, the prover will be rewarded for all of them, instead of taking a hit.
+
+**Why would block producers put up their own tokens as collateral for someone else’s transactions?**
+
+Block producers need to be incentivized to put up collateral, if all transactions in a block are proven to be not fraud (no fraud-proof in the next 7 days), then block producers should get some incentive for good behavior. If it's a PoS setup, it will be easier to tie the block reward with collateral, like locking their block reward as collateral.
+
+To increase the efficiency of this solution, we can batch multiple proofs with each other and put them on-chain in a single transaction. (only for non-interactive proofs)
+
+Collateral will work in case of optimistic fraud provers but not in the case of zk validity provers.
+
+## Inflationary token
+
+Similar to other blockchains, rollups will launch their own token (like OP or ARB) which can be used for rewarding provers on successful fraud proofs.
+
+Projects would need to figure out tokenomics which will be a challenge. Because that token needs to have a real use case from which it can derive its value, otherwise it wouldn’t be profitable for provers to just work for these rewards.
+
+This makes sense for both optimistic fraud provers and as well as zk validity provers
+
+# Conclusion
+
+Figuring out incentivisations for provers is going to be hard for rollups and the most important as well going forward into 2024.
